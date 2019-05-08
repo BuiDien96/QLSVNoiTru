@@ -20,10 +20,10 @@ namespace QLSVNoiTru.Controllers
             else
                 date = date.Value.Date;
 
-            DateTime thangtruoc = date.Value.AddDays(-1);
+            DateTime thangtruoc = date.Value.AddMonths(-1);
             List<Phong> phongs = db.Phongs.OrderBy(x => x.TangId).ToList();
-            int giadienId = db.GiaDiens.OrderByDescending(x => x.NgayCapNhat).FirstOrDefault().GiaDienId;
-            int gianuocId = db.GiaNuocs.OrderByDescending(x => x.NgayCapNhat).FirstOrDefault().GiaNuocId;
+            int giadienId = db.GiaDiens.OrderByDescending(x => x.NgayCapNhat.Year == date.Value.Year && x.NgayCapNhat.Month == date.Value.Month).FirstOrDefault().GiaDienId;
+            int gianuocId = db.GiaNuocs.OrderByDescending(x => x.NgayCapNhat.Year == date.Value.Year && x.NgayCapNhat.Month == date.Value.Month).FirstOrDefault().GiaNuocId;
             phongs.ForEach(x =>
             {
                 HoaDonDienNuoc hoaDonDienNuoc = db.HoaDonDienNuocs.FirstOrDefault(y => y.ThangGhi == date && y.SoHieuPhong == x.SoHieuPhong);
