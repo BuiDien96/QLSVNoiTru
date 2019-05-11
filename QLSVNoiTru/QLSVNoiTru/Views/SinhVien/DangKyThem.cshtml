@@ -119,19 +119,19 @@
                                 <div style="padding:10px;border:1px solid #dcdcdc">
                                     <h4>Thời gian đăng ký ở</h4>
                                     <div class="form-group">
-                                        <label>Từ ngày</label>
+                                        <label>Từ tháng</label>
                                         <div>
-                                            <input required type="month" name="TuThang" value="" class="form-control" />
+                                            <input required name="TuThang" value="" class="form-control datepicker-select-month" placeholder="mm/yyyy"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Đến ngày</label>
+                                        <label>Đến tháng</label>
                                         <div>
-                                            <input required type="month" name="DenThang" value="" class="form-control" />
+                                            <input required name="DenThang" value="" class="form-control datepicker-select-month" placeholder="mm/yyyy"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Số tiền</label>
+                                        <label>Số tiền (VNĐ)</label>
                                         <div>
                                             <input required type="text" name="TienPhi" value="" class="form-control" />
                                         </div>
@@ -208,7 +208,7 @@
         $("#SoHieuPhong").val(sohieuphong);
     }
     function ThayDoiGioiTinh() {
-        location.href = "/SinhVien/DangKyNoiTru?gioitinh=" + document.getElementsByName("GioiTinh")[0].value
+        location.href = "/SinhVien/DangKyThem?gioitinh=" + document.getElementsByName("GioiTinh")[0].value
     }
     function inHopDongNoiTru() {
         let MaSinhVien = document.getElementsByName("MaSinhVien")[0].value;
@@ -253,13 +253,14 @@
         let TenSinhVien = document.getElementsByName("TenSinhVien")[0].value;
         let TuThang = document.getElementsByName("TuThang")[0].value;
         let DenThang = document.getElementsByName("DenThang")[0].value;
+        let SoTien = document.getElementsByName("TienPhi")[0].value;
         if (validate(MaSinhVien) || validate(TenSinhVien) || validate(TuThang) || validate(DenThang)) {
             alert("Thông tin sinh viên cần nhập đầy đủ (Thông tin bao gồm: Mã sinh viên, Tên sinh viên, Phòng,Từ tháng, Đến tháng)");
             return
         }
         else {
             let prm = 'MaSinhVien=' + MaSinhVien + '&TenSinhVien=' + TenSinhVien + '&Phong=' + $("#SoHieuPhong").val()
-                + '&TuThang=' + TuThang + '&DenThang=' + DenThang;
+                + '&TuThang=' + TuThang + '&DenThang=' + DenThang + '&SoTien=' + SoTien;
             window.open('/SinhVien/InBienLaiThuTienPhong?' + prm, '_blank');
         }
     }
@@ -310,6 +311,16 @@
         });
     }
     $(document).ready(function () {
+        $('input[name="NgaySinh"]').prop('max', function(){
+            return new Date().toJSON().split('T')[0];
+        });
+
+        $('.datepicker-select-month').datepicker({
+            format: "mm/yyyy",
+            startView: "months",
+            minViewMode: "months"
+        });
+
         $("#form-submit").on('submit', function (e) {
             if (!acceptSubmit) {
                 e.preventDefault();
@@ -340,7 +351,7 @@
                 });
             }
         });
-        
+
         function setFileField(fileUrl) {
             $('#' + $(upload).attr('for')).val(fileUrl);
             $("#img-logo").attr("src", fileUrl);

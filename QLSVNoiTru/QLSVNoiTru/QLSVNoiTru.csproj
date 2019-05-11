@@ -178,97 +178,97 @@
     <Compile Include="Controllers\TongQuanController.cs" />
     <Compile Include="Controllers\TrangThietBiController.cs" />
     <Compile Include="Database\Action.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\BieuMau.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\DB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\DB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\DB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB.edmx</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\GiaDien.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\GiaNuoc.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\HoaDonDienNuoc.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Khoa.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\KyLuat.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\KyTucXa.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\LoaiMauBieu.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\LoaiPhong.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Lop.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\MauBieu.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\PhiPhong.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Phong.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\PhongThietBi.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\QLSVNoiTru.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLSVNoiTru.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\QLSVNoiTru.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\QLSVNoiTru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLSVNoiTru.edmx</DependentUpon>
     </Compile>
     <Compile Include="Database\Quyen.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\SinhVien.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\SinhVienChuyenPhong.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\SinhVienHoatDong.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\SinhVienKyLuat.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\SinhVienOLai.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\SinhVienTienPhong.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\sysdiagram.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Tang.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\ThietBi.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\User.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -280,15 +280,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\DB.Context.tt">
+    <Content Include="Database\QLSVNoiTru.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB.edmx</DependentUpon>
-      <LastGenOutput>DB.Context.cs</LastGenOutput>
+      <DependentUpon>QLSVNoiTru.edmx</DependentUpon>
+      <LastGenOutput>QLSVNoiTru.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Database\DB.tt">
+    <Content Include="Database\QLSVNoiTru.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB.edmx</DependentUpon>
-      <LastGenOutput>DB.cs</LastGenOutput>
+      <DependentUpon>QLSVNoiTru.edmx</DependentUpon>
+      <LastGenOutput>QLSVNoiTru.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Files\files_1\bongden.png" />
@@ -1457,12 +1457,12 @@
     <Content Include="Plugins\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Plugins\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Plugins\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
-    <EntityDeploy Include="Database\DB.edmx">
+    <EntityDeploy Include="Database\QLSVNoiTru.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DB.Designer.cs</LastGenOutput>
+      <LastGenOutput>QLSVNoiTru.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Database\DB.edmx.diagram">
-      <DependentUpon>DB.edmx</DependentUpon>
+    <Content Include="Database\QLSVNoiTru.edmx.diagram">
+      <DependentUpon>QLSVNoiTru.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

@@ -20,9 +20,10 @@ namespace QLSVNoiTru.Controllers
         {
             var db = new DB();
             string passCheck = DataHelper.MD5(user.Password);
-            if(db.Users.FirstOrDefault(x=>x.UserName == user.UserName && x.Password == passCheck && x.Quyen == user.Quyen) != null)
+            var userLogin = db.Users.FirstOrDefault(x => x.UserName == user.UserName && x.Password == passCheck && x.Quyen == user.Quyen);
+            if(userLogin != null)
             {
-                Session["user"] = user;
+                Session["user"] = userLogin;
                 Session["error"] = null;
                 return Redirect("/");
             }

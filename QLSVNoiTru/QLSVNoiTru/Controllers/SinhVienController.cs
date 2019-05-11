@@ -113,6 +113,7 @@ namespace QLSVNoiTru.Controllers
             {
                 sinhVien.NgayNhanPhong = DateTime.Now;
                 sinhVien.TrangThaiO = (int)TrangThaiO.DangO;
+                sinhVien.NgayNhanPhong = new DateTime(TuThang.Year, TuThang.Month, 1);
                 db.SinhViens.Add(sinhVien);
             }
             else
@@ -131,7 +132,7 @@ namespace QLSVNoiTru.Controllers
                     sinhVienOld.TenSinhVien = sinhVien.TenSinhVien;
                     sinhVienOld.SoHieuPhong = sinhVien.SoHieuPhong;
                     sinhVienOld.TrangThaiO = (int)TrangThaiO.DangO;
-                    sinhVienOld.NgayNhanPhong = DateTime.Now;
+                    sinhVienOld.NgayNhanPhong = new DateTime(TuThang.Year, TuThang.Month, 1);
                 }
             }
             db.PhiPhongs.Add(new PhiPhong()
@@ -344,6 +345,7 @@ namespace QLSVNoiTru.Controllers
             if (sinhVienOld != null)
             {
                 sinhVienOld.MaLop = sinhVien.MaLop;
+                sinhVienOld.MaSinhVien = sinhVienOld.MaSinhVien;
                 sinhVienOld.HoKhau = sinhVien.HoKhau;
                 sinhVienOld.DanToc = sinhVien.DanToc;
                 sinhVienOld.GhiChu = sinhVien.GhiChu;
@@ -373,6 +375,7 @@ namespace QLSVNoiTru.Controllers
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{lop}", lop.TenLop);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{khoa}", lop.Khoa.TenKhoa);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{quequan}", QueQuan);
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{daidienbanqlktx}", GetLoginFullName());
             ViewData["NoiDung"] = mauBieu.NoiDung;
             return View();
         }
@@ -391,12 +394,12 @@ namespace QLSVNoiTru.Controllers
             ViewData["NoiDung"] = mauBieu.NoiDung;
             return View();
         }
-
-        public ActionResult InBienLaiThuTienPhong(string MaSinhVien, string TenSinhVien, string Phong, string TuThang, string DenThang)
+        public ActionResult InBienLaiThuTienPhong(string MaSinhVien, string TenSinhVien, string Phong, string TuThang, string DenThang, string SoTien)
         {
             var db = new DB();
             MauBieu mauBieu = db.MauBieux.FirstOrDefault(x => x.LoaiMauBieuId == (int)LoaiMauBieu.BIENLAITHUPHONG);
             DateTime dateTime = DateTime.Now;
+            string SoTienBangChu = TienHelper.Convert_NumtoText(SoTien);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{sophieu}", "BLTP" + MaSinhVien);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{tensinhvien}", TenSinhVien);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{ngay}", dateTime.Day.ToString());
@@ -405,6 +408,8 @@ namespace QLSVNoiTru.Controllers
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{phong}", Phong);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{tuthang}", TuThang);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{denthang}", DenThang);
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{sotien}", SoTien);
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{sotienbangchu}", SoTienBangChu);
             ViewData["NoiDung"] = mauBieu.NoiDung;
             return View();
         }

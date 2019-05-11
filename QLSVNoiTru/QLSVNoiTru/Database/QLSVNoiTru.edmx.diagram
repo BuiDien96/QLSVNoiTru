@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="29847f909d084dfb8190f31dca00e54a" Name="Diagram1">
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.Action" Width="1.5" PointX="10.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.BieuMau" Width="1.5" PointX="12.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.GiaDien" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.GiaNuoc" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.HoaDonDienNuoc" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.Khoa" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.KyLuat" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.KyTucXa" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.LoaiMauBieu" Width="1.5" PointX="9.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.LoaiPhong" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.Lop" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.MauBieu" Width="1.5" PointX="12" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.PhiPhong" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.Phong" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.PhongThietBi" Width="1.5" PointX="10.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.Quyen" Width="1.5" PointX="5.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.SinhVien" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.SinhVienChuyenPhong" Width="1.5" PointX="7.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.SinhVienHoatDong" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.SinhVienKyLuat" Width="1.5" PointX="10.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.SinhVienOLai" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.SinhVienTienPhong" Width="1.5" PointX="7.5" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.sysdiagram" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.Tang" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.ThietBi" Width="1.5" PointX="8" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSVNoiTru.Database.User" Width="1.5" PointX="2.75" PointY="14.75" IsExpanded="true" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_HoaDonDienNuoc_GiaDien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_HoaDonDienNuoc_GiaNuoc" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_HoaDonDienNuoc_Phong" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_Lop_Khoa" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_SinhVienKyLuat_KyLuat" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_MauBieu_LoaiMauBieu" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_Phong_LoaiPhong" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_SinhVien_Lop" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_PhiPhong_SinhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_Phong_Tang" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_PhongThietBi_Phong" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_SinhVien_Phong" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_PhongThietBi_ThietBi" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_SinhVienChuyenPhong_SinhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_SinhVienHoatDong_SinhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_SinhVienKyLuat_SinhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSVNoiTru.Database.FK_SinhVienTienPhong_SinhVien" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

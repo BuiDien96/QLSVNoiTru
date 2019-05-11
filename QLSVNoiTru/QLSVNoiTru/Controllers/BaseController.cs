@@ -7,7 +7,6 @@ namespace QLSVNoiTru.Controllers
     {
         public bool CheckLogin(int quyen)
         {
-            return true;
             if (Session["user"] is null)
                 return false;
             User user = (User)Session["user"];
@@ -17,10 +16,18 @@ namespace QLSVNoiTru.Controllers
         }
         public bool CheckLogin()
         {
-            return true;
             if (Session["user"] is null)
                 return false;
             return true;
+        }
+
+        public string GetLoginFullName()
+        {
+            if (Session["user"] is null)
+            {
+                return null;
+            }
+            return ((User)Session["user"]).FullName;
         }
     }
 }

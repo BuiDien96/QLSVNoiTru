@@ -24,7 +24,7 @@
                                 <div class="form-group">
                                     <label>Tháng</label>
                                     <div>
-                                        <input id="datefilter" onchange="changeDateFilter()" class="form-control" type="date" name="name" value="@ViewBag.dateFilter" style="max-width:250px" />
+                                        <input id="datefilter" onchange="changeDateFilter()" class="form-control datepicker-months" name="name" value="@ViewBag.dateFilter" style="max-width:250px" placeholder="mm/yyyy"/>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
+                                    @*<th></th>*@
                                     <th></th>
                                 </tr>
                                 <tr>
@@ -56,7 +56,7 @@
                                     <th>Chi số đầu</th>
                                     <th>Chỉ số cuối</th>
                                     <th>Tổng tiền</th>
-                                    <th>Tháng ghi</th>
+                                    @*<th>Tháng ghi</th>*@
                                     <th>Ngày cập nhật</th>
                                     <th>Trạng thái</th>
                                     <th style="width: 150px;"></th>
@@ -93,9 +93,9 @@
                                             <input @(hoaDonDienNuocs[i].TrangThai == 1?"readonly":"") class="form-control" style="max-width:100px" type="text" name="hoaDonDienNuocs[@i].Chisonuoccuoi" value="@hoaDonDienNuocs[i].Chisonuoccuoi" />
                                         </td>
                                         <td>@hoaDonDienNuocs[i].TongTien</td>
-                                        <td>
+                                        @*<td>
                                             @hoaDonDienNuocs[i].ThangGhi.ToString("dd/MM/yyyy")
-                                        </td>
+                                        </td>*@
                                         <td>@(hoaDonDienNuocs[i].NgayLap == null ? "" : hoaDonDienNuocs[i].NgayLap.Value.ToString("dd/MM/yyyy HH:mm"))</td>
                                         <td>
                                             @(hoaDonDienNuocs[i].TrangThai == -1 ? "Chưa cập nhật" : hoaDonDienNuocs[i].TrangThai == 0 ? "Chưa thanh toán" : "Đã thanh toán")
@@ -131,5 +131,23 @@
 <script>
     function changeDateFilter() {
         location.href = "/HoaDon/DanhSachHoaDonDienNuoc?date=" + $("#datefilter").val()
-    }
+        }
+
+    $('[name^="hoaDonDienNuocs"]').on('focusout', function () {
+        if ($(this).attr('name').indexOf('Chisodiencuoi') != -1 || $(this).attr('name').indexOf('Chisonuoccuoi') != -1) {
+            var chisodau = parseInt($(this).closest('td').prev().find('input').val());
+            var chisocuoi = parseInt($(this).val());
+            if (chisodau > chisocuoi) {
+                alert('Chỉ số đầu phải nhỏ hơn hoặc bằng chỉ số cuối');
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        $('.datepicker-months').datepicker({
+            format: "mm/yyyy",
+            startView: "months",
+            minViewMode: "months"
+        });
+    });
 </script>

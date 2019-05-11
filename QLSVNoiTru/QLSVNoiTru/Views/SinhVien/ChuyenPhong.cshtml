@@ -4,6 +4,7 @@
     ViewBag.Title = "Chuyển phòng";
     List<SinhVien> sinhViens = (List<SinhVien>)ViewData["sinhViens"];
     List<EPhong> ePhongs = (List<EPhong>)ViewData["ePhongs"];
+
 }
 <style>
     @@media (min-width: 768px) {
@@ -76,11 +77,22 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label>Phòng mới <span class="required-field">(*)</span></label>
+                                                                        @{ 
+                                                                            int loaiPhongBoDi = -1;
+                                                                            if (item.Phong.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNam)
+                                                                            {
+                                                                                loaiPhongBoDi = (int)MucDichLoaiPhong.ChiDanhCHoNu;
+                                                                            } else if (item.Phong.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNu)
+                                                                            {
+                                                                                loaiPhongBoDi = (int)MucDichLoaiPhong.ChiDanhCHoNam;
+                                                                            }
+                                                                            var ePhongsNew = ePhongs.Where(x => x.LoaiPhong.MucDich != loaiPhongBoDi && x.SoHieuPhong != item.SoHieuPhong && x.SoPhongDaO < x.SucChuaToiDa).ToList();
+                                                                        }
                                                                         <select required name="SoHieuPhongMoi" class="form-control">
                                                                             <option value="">Chọn...</option>
-                                                                            @for (int i = 0; i < ePhongs.Count; i++)
+                                                                            @for (int i = 0; i < ePhongsNew.Count; i++)
                                                                             {
-                                                                                <option value="@ePhongs[i].SoHieuPhong">@ePhongs[i].SoHieuPhong</option>
+                                                                                <option value="@ePhongsNew[i].SoHieuPhong">@ePhongsNew[i].SoHieuPhong</option>
                                                                             }
                                                                         </select>
                                                                     </div>

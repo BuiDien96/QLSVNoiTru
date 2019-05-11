@@ -18,9 +18,9 @@
                     <h4 class="header-title">Thông tin sinh viên</h4>
                 </div>
                 <div class="col-md-12" style="text-align:right;padding-right:20px;padding-bottom:20px">
-                    <a target="_blank" href="/MauBieu/InHopDongNoiTru?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In hợp đồng nội trú</a>
+                    @*<a target="_blank" href="/MauBieu/InHopDongNoiTru?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In hợp đồng nội trú</a>
                     <a target="_blank" href="/MauBieu/InBienLaiThuTienCoc?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In biên lai thu tiền cọc</a>
-                    <a target="_blank" href="/MauBieu/InBienLaiThuPhong?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In biên lai thu tiền phòng</a>
+                    <a target="_blank" href="/MauBieu/InBienLaiThuPhong?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In biên lai thu tiền phòng</a>*@
                     <a target="_blank" href="/MauBieu/InBienLaiThanhLyHopDong?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In biên lai thanh lý hợp đồng</a>
                     <a target="_blank" href="/MauBieu/InDonXinRaNoiTru?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In đơn xin ra nội trú</a>
                 </div>
@@ -66,7 +66,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Giới tính <span class="required-field">(*)</span></label>
-                                    <select name="GioiTinh" class="form-control">
+                                    <select name="GioiTinh" class="form-control" disabled="disabled">
                                         <option @(sinhvien.GioiTinh == "Nam" ? "selected" : "") value="Nam">Nam</option>
                                         <option @(sinhvien.GioiTinh != "Nam" ? "selected" : "") value="Nữ">Nữ</option>
                                     </select>
@@ -183,6 +183,11 @@
             $('#' + $(upload).attr('for')).val(fileUrl);
             $("#img-logo").attr("src", fileUrl);
         }
+
+        $('input[name="NgaySinh"]').prop('max', function(){
+            return new Date().toJSON().split('T')[0];
+        });
+
         if (!$('.button-upload').length > 0) {
             var upload;
             var textBox = $('.upload');
