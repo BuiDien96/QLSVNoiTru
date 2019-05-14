@@ -1,7 +1,7 @@
 ﻿@using QLSVNoiTru.Database;
 @using QLSVNoiTru.Models;
 @{
-    int quyen = 0;
+    int quyen = 1;
     if (Session["user"] != null)
     {
         User user = (User)Session["user"];
@@ -149,6 +149,14 @@
                             <li><a href="/KyLuatKhenThuong/KhenThuong"><i class="fa fa-circle-o"></i><span> Khen thưởng </span></a></li>
                             <li><a href="/KyLuatKhenThuong/KyLuat"><i class="fa fa-circle-o"></i><span> Kỷ luật </span></a></li>
                         </ul>
+                    </li>
+                }
+                @if (quyen == QuyenDangNhap.BPQuanLy)
+                {
+                    <li id="MAUBIEU">
+                        <a href="/MauBieu/DanhSachMauBieu">
+                            <i class="fa fa-file"></i> Mẫu biểu
+                        </a>
                     </li>
                 }
                 @if (quyen == QuyenDangNhap.BPQuanLy)

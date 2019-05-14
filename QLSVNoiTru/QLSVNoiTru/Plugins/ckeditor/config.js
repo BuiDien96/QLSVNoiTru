@@ -4,6 +4,6 @@
  */
 
 CKEDITOR.editorConfig = function (config) {
-    config.height = 250; 
+    config.height = 650; 
     config.filebrowserBrowseUrl = '/Plugin/ckfinder/ckfinder.html';
 };

@@ -170,6 +170,7 @@
     <Compile Include="Controllers\LoaiPhongController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LopController.cs" />
+    <Compile Include="Controllers\MauBieuController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\PhongController.cs" />
     <Compile Include="Controllers\QuanLyController.cs" />
@@ -1506,6 +1507,11 @@
     <Content Include="Views\QuanLy\SinhVienCheckout.cshtml" />
     <Content Include="Views\NguoiDung\Thongtintaikhoan.cshtml" />
     <Content Include="Views\Login\DangNhap.cshtml" />
+    <Content Include="Views\MauBieu\DanhSachMauBieu.cshtml" />
+    <Content Include="Views\MauBieu\Chitiet.cshtml" />
+    <Content Include="Views\SinhVien\InHopDongNoiTru.cshtml" />
+    <Content Include="Views\SinhVien\InBienLaiThuTienCoc.cshtml" />
+    <Content Include="Views\SinhVien\InBienLaiThuTienPhong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

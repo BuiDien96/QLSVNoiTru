@@ -1,0 +1,48 @@
+﻿@using QLSVNoiTru.Database;
+@using QLSVNoiTru.Models;
+@{
+    ViewBag.Title = "Quản lý mẫu biểu";
+    List<MauBieu> mauBieus = (List<MauBieu>)ViewData["mauBieus"];
+
+}
+<script>
+    $("#MAUBIEU").addClass("active");
+</script>
+<div class="body">
+    <section class="content">
+        <div class="header">
+            <div class="col-md-12">
+                <h4 class="header-title">Quản lý mẫu biểu</h4>
+            </div>
+        </div>
+        <!-- CONTENT -->
+        <div class="main-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover datatable">
+                        <thead>
+                            <tr>
+                                <th>Loại mẫu biểu</th>
+                                <th>Tiêu đề</th>
+                                <th style="width: 200px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in mauBieus)
+                            {
+                                <tr>
+                                    <td>@item.LoaiMauBieu.TenLoaiMauBieu</td>
+                                    <td>@item.TieuDe</td>
+                                    <td class="text-center">
+                                        <a href="/MauBieu/Chitiet?maubieuId=@item.MauBieuId" class="btn btn-primary btn-sm">Sửa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- END: CONTENT -->
+    </section>
+</div>
