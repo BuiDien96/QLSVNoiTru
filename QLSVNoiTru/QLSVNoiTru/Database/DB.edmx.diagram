@@ -45,6 +45,9 @@
         <AssociationConnector Association="QLSVNoiTruModel.FK_SinhVienChuyenPhong_SinhVien" />
         <AssociationConnector Association="QLSVNoiTruModel.FK_SinhVienHoatDong_SinhVien" />
         <AssociationConnector Association="QLSVNoiTruModel.FK_SinhVienKyLuat_SinhVien" />
+        <EntityTypeShape EntityType="QLSVNoiTruModel.BieuMau" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="QLSVNoiTruModel.SinhVienTienPhong" Width="1.5" PointX="10.5" PointY="20.5" />
+        <AssociationConnector Association="QLSVNoiTruModel.FK_SinhVienTienPhong_SinhVien" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

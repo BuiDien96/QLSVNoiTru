@@ -89,6 +89,12 @@
       <End Role="SinhVien" EntitySet="SinhViens" />
       <End Role="SinhVienKyLuat" EntitySet="SinhVienKyLuats" />
     </AssociationSet>
+    <EntitySet Name="BieuMaus" EntityType="QLSVNoiTruModel.BieuMau" />
+    <EntitySet Name="SinhVienTienPhongs" EntityType="QLSVNoiTruModel.SinhVienTienPhong" />
+    <AssociationSet Name="FK_SinhVienTienPhong_SinhVien" Association="QLSVNoiTruModel.FK_SinhVienTienPhong_SinhVien">
+      <End Role="SinhVien" EntitySet="SinhViens" />
+      <End Role="SinhVienTienPhong" EntitySet="SinhVienTienPhongs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Action">
     <Key>
@@ -213,6 +219,7 @@
     <Property Name="SoTien" Type="Double" Nullable="false" />
     <Property Name="GhiChu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="SinhVien" Relationship="QLSVNoiTruModel.FK_PhiPhong_SinhVien" FromRole="PhiPhong" ToRole="SinhVien" />
+    <Property Name="DenThang" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
   <EntityType Name="Phong">
     <Key>
@@ -270,6 +277,7 @@
     <NavigationProperty Name="SinhVienChuyenPhongs" Relationship="QLSVNoiTruModel.FK_SinhVienChuyenPhong_SinhVien" FromRole="SinhVien" ToRole="SinhVienChuyenPhong" />
     <NavigationProperty Name="SinhVienHoatDongs" Relationship="QLSVNoiTruModel.FK_SinhVienHoatDong_SinhVien" FromRole="SinhVien" ToRole="SinhVienHoatDong" />
     <NavigationProperty Name="SinhVienKyLuats" Relationship="QLSVNoiTruModel.FK_SinhVienKyLuat_SinhVien" FromRole="SinhVien" ToRole="SinhVienKyLuat" />
+    <NavigationProperty Name="SinhVienTienPhongs" Relationship="QLSVNoiTruModel.FK_SinhVienTienPhong_SinhVien" FromRole="SinhVien" ToRole="SinhVienTienPhong" />
   </EntityType>
   <EntityType Name="SinhVienChuyenPhong">
     <Key>
@@ -538,6 +546,36 @@
         <PropertyRef Name="MaSinhVien" />
       </Principal>
       <Dependent Role="SinhVienKyLuat">
+        <PropertyRef Name="MaSinhVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BieuMau">
+    <Key>
+      <PropertyRef Name="BieuMauId" />
+    </Key>
+    <Property Name="BieuMauId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TieuDe" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SinhVienTienPhong">
+    <Key>
+      <PropertyRef Name="SinhVienTienPhongId" />
+    </Key>
+    <Property Name="SinhVienTienPhongId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaSinhVien" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Thang" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="SinhVien" Relationship="QLSVNoiTruModel.FK_SinhVienTienPhong_SinhVien" FromRole="SinhVienTienPhong" ToRole="SinhVien" />
+  </EntityType>
+  <Association Name="FK_SinhVienTienPhong_SinhVien">
+    <End Type="QLSVNoiTruModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+    <End Type="QLSVNoiTruModel.SinhVienTienPhong" Role="SinhVienTienPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SinhVien">
+        <PropertyRef Name="MaSinhVien" />
+      </Principal>
+      <Dependent Role="SinhVienTienPhong">
         <PropertyRef Name="MaSinhVien" />
       </Dependent>
     </ReferentialConstraint>

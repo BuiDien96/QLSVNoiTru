@@ -104,7 +104,7 @@ namespace QLSVNoiTru.Controllers
         }
 
         [HttpPost]
-        public ActionResult DangKyNoiTru(SinhVien sinhVien, int dangkychosinhvien = 1)
+        public ActionResult DangKyNoiTru(SinhVien sinhVien, DateTime TuThang, DateTime DenThang, float TienPhi, int dangkychosinhvien = 1)
         {
             if (!CheckLogin(QuyenDangNhap.BPQuanLy))
                 return Redirect("/Login/DangNhap");
@@ -134,6 +134,14 @@ namespace QLSVNoiTru.Controllers
                     sinhVienOld.NgayNhanPhong = DateTime.Now;
                 }
             }
+            db.PhiPhongs.Add(new PhiPhong()
+            {
+                MaSinhVien = sinhVien.MaSinhVien,
+                Thang = TuThang,
+                DenThang = DenThang,
+                SoTien = TienPhi,
+                TrangThai = true,
+            });
             db.SaveChanges();
             return RedirectToAction("DanhSachSinhVien");
         }
@@ -307,6 +315,7 @@ namespace QLSVNoiTru.Controllers
             SinhVien sinhVien = db.SinhViens.FirstOrDefault(x => x.MaSinhVien == masinhvien);
             ViewData["sinhVien"] = sinhVien;
             ViewData["lops"] = db.Lops.ToList();
+            ViewData["phiPhongs"] = db.PhiPhongs.Where(x => x.MaSinhVien == masinhvien).OrderByDescending(x => x.Thang).ToList();
             return View();
         }
         public ActionResult Xoa(string masinhvien)

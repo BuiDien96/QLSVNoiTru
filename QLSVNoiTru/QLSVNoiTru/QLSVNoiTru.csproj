@@ -180,6 +180,9 @@
     <Compile Include="Database\Action.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\BieuMau.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -250,6 +253,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\SinhVienOLai.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\SinhVienTienPhong.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\sysdiagram.cs">
@@ -1512,6 +1518,9 @@
     <Content Include="Views\SinhVien\InHopDongNoiTru.cshtml" />
     <Content Include="Views\SinhVien\InBienLaiThuTienCoc.cshtml" />
     <Content Include="Views\SinhVien\InBienLaiThuTienPhong.cshtml" />
+    <Content Include="Views\MauBieu\InHopDongNoiTru.cshtml" />
+    <Content Include="Views\MauBieu\InBienLaiThuTienCoc.cshtml" />
+    <Content Include="Views\MauBieu\InBienLaiThuTienPhong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

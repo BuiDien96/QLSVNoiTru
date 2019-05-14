@@ -4,6 +4,7 @@
     ViewBag.Title = "Thông tin sinh viên";
     SinhVien sinhvien = (SinhVien)ViewData["sinhvien"];
     List<Lop> lops = (List<Lop>)ViewData["lops"];
+    List<PhiPhong> phiPhongs = (List<PhiPhong>)ViewData["phiPhongs"];
 }
 <script src="~/Plugins/ckfinder/ckfinder.js"></script>
 <script>
@@ -12,8 +13,17 @@
 <div class="body">
     <section class="content">
         <div class="header">
-            <div class="col-md-12">
-                <h4 class="header-title">Thông tin sinh viên</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="header-title">Thông tin sinh viên</h4>
+                </div>
+                <div class="col-md-6" style="padding-top:10px;text-align:right;padding-right:20px">
+                    <a href="/MauBieu/InHopDongNoiTru?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In hợp đồng nội trú</a>
+                    <a href="/MauBieu/InBienLaiThuTienCoc?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In biên lai thu tiền cọc</a>
+                    <a href="/MauBieu/InBienLaiThuPhong?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In biên lai thu tiền phòng</a>
+                    <a href="/MauBieu/InBienLaiThanhLyHopDong?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In biên lai thanh lý hợp đồng</a>
+                    <a href="/MauBieu/InDonXinRaNoiTru?maSinhVien=@sinhvien.MaSinhVien" class="btn btn-primary">In đơn xin ra nội trú</a>
+                </div>
             </div>
         </div>
         <!-- CONTENT -->
@@ -84,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-4">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -128,6 +138,32 @@
                                         </p>
                                     }
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div style="padding:10px;border:1px solid #dcdcdc">
+                            <h4>Thông tin đóng tiền phòng ký túc xá</h4>
+                            <div>
+                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>Từ tháng</th>
+                                            <th>Đến tháng</th>
+                                            <th>Số tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in phiPhongs)
+                                        {
+                                            <tr>
+                                                <td>@item.Thang.ToString("mm-yyyy")</td>
+                                                <td>@item.DenThang.ToString("mm-yyyy")</td>
+                                                <td>@item.SoTien</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -12,15 +12,12 @@ namespace QLSVNoiTru.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class PhiPhong
+    public partial class SinhVienTienPhong
     {
-        public int PhiPhongId { get; set; }
+        public int SinhVienTienPhongId { get; set; }
         public string MaSinhVien { get; set; }
         public System.DateTime Thang { get; set; }
         public bool TrangThai { get; set; }
-        public double SoTien { get; set; }
-        public string GhiChu { get; set; }
-        public System.DateTime DenThang { get; set; }
     
         public virtual SinhVien SinhVien { get; set; }
     }

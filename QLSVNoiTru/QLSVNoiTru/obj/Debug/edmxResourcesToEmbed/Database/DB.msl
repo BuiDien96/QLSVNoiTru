@@ -115,6 +115,7 @@
     <EntitySetMapping Name="PhiPhongs">
       <EntityTypeMapping TypeName="QLSVNoiTruModel.PhiPhong">
         <MappingFragment StoreEntitySet="PhiPhong">
+          <ScalarProperty Name="DenThang" ColumnName="DenThang" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
           <ScalarProperty Name="SoTien" ColumnName="SoTien" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
@@ -250,6 +251,25 @@
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BieuMaus">
+      <EntityTypeMapping TypeName="QLSVNoiTruModel.BieuMau">
+        <MappingFragment StoreEntitySet="BieuMau">
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+          <ScalarProperty Name="BieuMauId" ColumnName="BieuMauId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SinhVienTienPhongs">
+      <EntityTypeMapping TypeName="QLSVNoiTruModel.SinhVienTienPhong">
+        <MappingFragment StoreEntitySet="SinhVienTienPhong">
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="Thang" ColumnName="Thang" />
+          <ScalarProperty Name="MaSinhVien" ColumnName="MaSinhVien" />
+          <ScalarProperty Name="SinhVienTienPhongId" ColumnName="SinhVienTienPhongId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

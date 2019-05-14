@@ -49,5 +49,7 @@ namespace QLSVNoiTru.Database
         public virtual DbSet<Tang> Tangs { get; set; }
         public virtual DbSet<ThietBi> ThietBis { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<BieuMau> BieuMaus { get; set; }
+        public virtual DbSet<SinhVienTienPhong> SinhVienTienPhongs { get; set; }
     }
 }

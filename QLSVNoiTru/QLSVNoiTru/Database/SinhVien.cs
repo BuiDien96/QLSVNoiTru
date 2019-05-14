@@ -21,6 +21,7 @@ namespace QLSVNoiTru.Database
             this.SinhVienChuyenPhongs = new HashSet<SinhVienChuyenPhong>();
             this.SinhVienHoatDongs = new HashSet<SinhVienHoatDong>();
             this.SinhVienKyLuats = new HashSet<SinhVienKyLuat>();
+            this.SinhVienTienPhongs = new HashSet<SinhVienTienPhong>();
         }
     
         public string MaSinhVien { get; set; }
@@ -48,5 +49,7 @@ namespace QLSVNoiTru.Database
         public virtual ICollection<SinhVienHoatDong> SinhVienHoatDongs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SinhVienKyLuat> SinhVienKyLuats { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SinhVienTienPhong> SinhVienTienPhongs { get; set; }
     }
 }
