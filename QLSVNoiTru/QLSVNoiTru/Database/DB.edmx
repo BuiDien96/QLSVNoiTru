@@ -133,6 +133,7 @@
           <Property Name="MaLoaiPhong" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="TangId" Type="int" Nullable="false" />
           <Property Name="SucChuaToiDa" Type="int" Nullable="false" />
+          <Property Name="TrangThai" Type="bit" />
         </EntityType>
         <EntityType Name="PhongThietBi">
           <Key>
@@ -789,6 +790,7 @@
           <NavigationProperty Name="Tang" Relationship="QLSVNoiTruModel.FK_Phong_Tang" FromRole="Phong" ToRole="Tang" />
           <NavigationProperty Name="PhongThietBis" Relationship="QLSVNoiTruModel.FK_PhongThietBi_Phong" FromRole="Phong" ToRole="PhongThietBi" />
           <NavigationProperty Name="SinhViens" Relationship="QLSVNoiTruModel.FK_SinhVien_Phong" FromRole="Phong" ToRole="SinhVien" />
+          <Property Name="TrangThai" Type="Boolean" />
         </EntityType>
         <EntityType Name="PhongThietBi">
           <Key>
@@ -1268,6 +1270,7 @@
           <EntitySetMapping Name="Phongs">
             <EntityTypeMapping TypeName="QLSVNoiTruModel.Phong">
               <MappingFragment StoreEntitySet="Phong">
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
                 <ScalarProperty Name="SucChuaToiDa" ColumnName="SucChuaToiDa" />
                 <ScalarProperty Name="TangId" ColumnName="TangId" />
                 <ScalarProperty Name="MaLoaiPhong" ColumnName="MaLoaiPhong" />

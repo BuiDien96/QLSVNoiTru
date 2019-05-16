@@ -49,23 +49,23 @@ namespace QLSVNoiTru.Controllers
                     TenTang = x.TenTang,
                     Phongs = new List<EPhong>()
                 };
-                x.Phongs.ToList().ForEach(y =>
-                {
-                    if ((gioitinh == "Nam" && (y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNam || y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.CaNamNu))
-                    || (gioitinh == "Nữ" && (y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNu || y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.CaNamNu)))
-                    {
-                        int svDaO = db.SinhViens.Where(z => z.SoHieuPhong == y.SoHieuPhong && z.TrangThaiO == (int)TrangThaiO.DangO).Count();
-                        eTang.Phongs.Add(new EPhong()
-                        {
-                            LoaiPhong = y.LoaiPhong,
-                            MaLoaiPhong = y.MaLoaiPhong,
-                            SoHieuPhong = y.SoHieuPhong,
-                            SoPhongDaO = svDaO,
-                            SucChuaToiDa = y.SucChuaToiDa,
-                            TangId = y.TangId
-                        });
-                    }
-                });
+                x.Phongs.Where(y => y.TrangThai != null && y.TrangThai.Value).ToList().ForEach(y =>
+                  {
+                      if ((gioitinh == "Nam" && (y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNam || y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.CaNamNu))
+                      || (gioitinh == "Nữ" && (y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNu || y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.CaNamNu)))
+                      {
+                          int svDaO = db.SinhViens.Where(z => z.SoHieuPhong == y.SoHieuPhong && z.TrangThaiO == (int)TrangThaiO.DangO).Count();
+                          eTang.Phongs.Add(new EPhong()
+                          {
+                              LoaiPhong = y.LoaiPhong,
+                              MaLoaiPhong = y.MaLoaiPhong,
+                              SoHieuPhong = y.SoHieuPhong,
+                              SoPhongDaO = svDaO,
+                              SucChuaToiDa = y.SucChuaToiDa,
+                              TangId = y.TangId
+                          });
+                      }
+                  });
                 eTangs.Add(eTang);
             });
             ViewData["eTangs"] = eTangs;
@@ -152,7 +152,7 @@ namespace QLSVNoiTru.Controllers
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             List<SinhVien> sinhViens = db.SinhViens.Where(x => (string.IsNullOrEmpty(maSinhVien) || x.MaSinhVien.Contains(maSinhVien)) && x.TrangThaiO != (int)TrangThaiO.CheckOut).OrderByDescending(x => x.NgayNhanPhong).ToList();
-            List<Phong> phongs = db.Phongs.ToList();
+            List<Phong> phongs = db.Phongs.Where(y => y.TrangThai != null && y.TrangThai.Value).ToList();
             List<EPhong> ePhongs = new List<EPhong>();
             phongs.ForEach(x =>
             {
@@ -382,7 +382,7 @@ namespace QLSVNoiTru.Controllers
             var db = new DB();
             MauBieu mauBieu = db.MauBieux.FirstOrDefault(x => x.LoaiMauBieuId == (int)LoaiMauBieu.BIENLAITHUTIENCOC);
             DateTime dateTime = DateTime.Now;
-            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{sophieu}","BLTC"+ MaSinhVien);
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{sophieu}", "BLTC" + MaSinhVien);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{tensinhvien}", TenSinhVien);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{ngay}", dateTime.Day.ToString());
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{thang}", dateTime.Month.ToString());
@@ -392,12 +392,12 @@ namespace QLSVNoiTru.Controllers
             return View();
         }
 
-        public ActionResult InBienLaiThuTienPhong(string MaSinhVien, string TenSinhVien, string Phong,string TuThang,string DenThang)
+        public ActionResult InBienLaiThuTienPhong(string MaSinhVien, string TenSinhVien, string Phong, string TuThang, string DenThang)
         {
             var db = new DB();
             MauBieu mauBieu = db.MauBieux.FirstOrDefault(x => x.LoaiMauBieuId == (int)LoaiMauBieu.BIENLAITHUPHONG);
             DateTime dateTime = DateTime.Now;
-            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{sophieu}","BLTP"+ MaSinhVien);
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{sophieu}", "BLTP" + MaSinhVien);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{tensinhvien}", TenSinhVien);
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{ngay}", dateTime.Day.ToString());
             mauBieu.NoiDung = mauBieu.NoiDung.Replace("{thang}", dateTime.Month.ToString());

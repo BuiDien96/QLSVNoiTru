@@ -50,7 +50,7 @@ namespace QLSVNoiTru.Controllers
             Phong phong = db.Phongs.FirstOrDefault(x => x.SoHieuPhong == soHieuPhong);
             if (phong != null)
             {
-                db.Phongs.Remove(phong);
+                phong.TrangThai = false;
                 db.SaveChanges();
             }
             return RedirectToAction("DanhSachPhong");
@@ -67,7 +67,8 @@ namespace QLSVNoiTru.Controllers
                 phong.MaLoaiPhong,
                 phong.SoHieuPhong,
                 phong.TangId,
-                phong.SucChuaToiDa
+                phong.SucChuaToiDa,
+                TrangThai = phong.TrangThai ?? false
             }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -82,6 +83,7 @@ namespace QLSVNoiTru.Controllers
                 phongCu.MaLoaiPhong = phong.MaLoaiPhong;
                 phongCu.TangId = phong.TangId;
                 phongCu.SucChuaToiDa = phong.SucChuaToiDa;
+                phongCu.TrangThai = phong.TrangThai;
                 db.SaveChanges();
             }
             return RedirectToAction("DanhSachPhong");
@@ -91,7 +93,7 @@ namespace QLSVNoiTru.Controllers
         {
             var db = new DB();
             ViewData["loaiphongs"] = db.LoaiPhongs.ToList();
-            ViewData["phongs"] = db.Phongs.ToList();
+            ViewData["phongs"] = db.Phongs.Where(y => y.TrangThai != null && y.TrangThai.Value).ToList();
             return View();
         }
 
@@ -100,7 +102,7 @@ namespace QLSVNoiTru.Controllers
             if (!CheckLogin(QuyenDangNhap.BPQuanLy))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
-            Phong phong = db.Phongs.FirstOrDefault(x => x.SoHieuPhong == soHieuPhong);
+            Phong phong = db.Phongs.Where(y => y.TrangThai != null && y.TrangThai.Value).FirstOrDefault(x => x.SoHieuPhong == soHieuPhong);
             List<ThietBi> thietBis = db.ThietBis.ToList();
             List<PhongThietBi> phongThietBis = db.PhongThietBis.Where(x => x.SoHieuPhong == soHieuPhong).ToList();
             List<EThietBi> ethietBis = new List<EThietBi>();

@@ -128,6 +128,7 @@
     <Property Name="MaLoaiPhong" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="TangId" Type="int" Nullable="false" />
     <Property Name="SucChuaToiDa" Type="int" Nullable="false" />
+    <Property Name="TrangThai" Type="bit" />
   </EntityType>
   <EntityType Name="PhongThietBi">
     <Key>

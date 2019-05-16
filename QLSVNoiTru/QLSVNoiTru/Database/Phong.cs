@@ -26,6 +26,7 @@ namespace QLSVNoiTru.Database
         public string MaLoaiPhong { get; set; }
         public int TangId { get; set; }
         public int SucChuaToiDa { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDonDienNuoc> HoaDonDienNuocs { get; set; }

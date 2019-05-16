@@ -12,7 +12,7 @@ namespace QLSVNoiTru.Controllers
         // GET: HoaDon
         public ActionResult DanhSachHoaDonDienNuoc(DateTime? date = null)
         {
-            if (!CheckLogin(QuyenDangNhap.BPDienNuoc))
+            if (!CheckLogin())
                 return Redirect("/Login/DangNhap");
             List<HoaDonDienNuoc> hoaDonDienNuocs = new List<HoaDonDienNuoc>();
             var db = new DB();
@@ -21,7 +21,7 @@ namespace QLSVNoiTru.Controllers
                 date = date.Value.Date;
 
             DateTime thangtruoc = date.Value.AddMonths(-1);
-            List<Phong> phongs = db.Phongs.OrderBy(x => x.TangId).ToList();
+            List<Phong> phongs = db.Phongs.Where(y => y.TrangThai != null && y.TrangThai.Value).OrderBy(x => x.TangId).ToList();
             int giadienId = db.GiaDiens.OrderByDescending(x => x.NgayCapNhat.Year == date.Value.Year && x.NgayCapNhat.Month == date.Value.Month).FirstOrDefault().GiaDienId;
             int gianuocId = db.GiaNuocs.OrderByDescending(x => x.NgayCapNhat.Year == date.Value.Year && x.NgayCapNhat.Month == date.Value.Month).FirstOrDefault().GiaNuocId;
             phongs.ForEach(x =>
@@ -63,7 +63,7 @@ namespace QLSVNoiTru.Controllers
         [HttpPost]
         public ActionResult CapNhatHoaDon(List<HoaDonDienNuoc> hoaDonDienNuocs, string thangghi)
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin())
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             DateTime dateTimeNow = DateTime.Now;
@@ -107,7 +107,7 @@ namespace QLSVNoiTru.Controllers
 
         public ActionResult ThanhToanHoaDon(int mahoadon, DateTime thangghi)
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin())
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             HoaDonDienNuoc hoaDonDienNuoc = db.HoaDonDienNuocs.FirstOrDefault(x => x.HoaDonDienNuocId == mahoadon);

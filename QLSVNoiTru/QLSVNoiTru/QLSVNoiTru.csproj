@@ -1520,7 +1520,9 @@
     <Content Include="Views\SinhVien\InBienLaiThuTienPhong.cshtml" />
     <Content Include="Views\MauBieu\InHopDongNoiTru.cshtml" />
     <Content Include="Views\MauBieu\InBienLaiThuTienCoc.cshtml" />
-    <Content Include="Views\MauBieu\InBienLaiThuTienPhong.cshtml" />
+    <Content Include="Views\MauBieu\InBienLaiThuPhong.cshtml" />
+    <Content Include="Views\MauBieu\InBienLaiThanhLyHopDong.cshtml" />
+    <Content Include="Views\MauBieu\InDonXinRaNoiTru.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

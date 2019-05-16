@@ -29,6 +29,7 @@
                                 <th class="text-center">Tầng</th>
                                 <th class="text-center">Số sinh viên ở</th>
                                 <th class="text-center">Sức chứa tối đa</th>
+                                <th class="text-center">Trạng thái</th>
                                 <th style="width: 200px;"></th>
                             </tr>
                         </thead>
@@ -41,10 +42,10 @@
                                     <td class="text-center">@item.Tang.TenTang</td>
                                     <td class="text-center">@(item.SinhViens.Where(x => x.SoHieuPhong == item.SoHieuPhong && x.TrangThaiO == (int)TrangThaiO.DangO).Count())</td>
                                     <td class="text-center">@item.SucChuaToiDa</td>
+                                    <td class="text-center">@(item.TrangThai == null || !item.TrangThai.Value ? "Đã khóa" : "Đang hoạt động")</td>
                                     <td class="text-center">
                                         <a href="/Phong/DSSinhVienO?soHieuPhong=@item.SoHieuPhong" class="btn btn-primary btn-sm">DS sinh viên ở</a>
                                         <button onclick="chitiet('@item.SoHieuPhong')" class="btn btn-primary btn-sm">Sửa</button>
-                                        <button onclick="xacnhanxoa('@item.SoHieuPhong')" class="btn btn-danger btn-sm">Xóa</button>
                                     </td>
                                 </tr>
                             }
@@ -92,6 +93,13 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label>Trạng thái</label>
+                                <select name="TrangThai" class="form-control" required>
+                                    <option value="true">Hoạt động</option>
+                                    <option value="false">Khóa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label>Sức chứa tối đa <span class="required-field">(*)</span></label>
                                 <input required name="SucChuaToiDa" type="number" value="6" min="1" class="form-control" />
                             </div>
@@ -106,23 +114,6 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalDelete">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Cảnh báo</h4>
-            </div>
-            <div class="modal-body">
-                <h4>Bạn có chắc chắn muốn xóa bản ghi này?</h4>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <a id="xoa_banghi" href="" class="btn btn-danger">Xóa</a>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     var acceptSubmit = false;
     var isThemMoi = true;
@@ -134,13 +125,10 @@
         document.getElementsByName("SoHieuPhong")[0].value = "";
         document.getElementsByName("MaLoaiPhong")[0].value = "";
         document.getElementsByName("TangId")[0].value = "";
+        document.getElementsByName("TrangThai")[0].value = "false";
         $("#SoHieuPhong").removeAttr("readonly");
         $("#form-submit").attr("action", "/phong/themmoi");
         $("#myModal").modal();
-    }
-    function xacnhanxoa(soHieuPhong) {
-        $("#xoa_banghi").attr("href", "/phong/xoa?soHieuPhong=" + soHieuPhong);
-        $("#modalDelete").modal();
     }
     function chitiet(soHieuPhong) {
         isThemMoi = false;
@@ -149,6 +137,7 @@
             document.getElementsByName("SoHieuPhong")[0].value = data.SoHieuPhong;
             document.getElementsByName("TangId")[0].value = data.TangId;
             document.getElementsByName("SucChuaToiDa")[0].value = data.SucChuaToiDa;
+            document.getElementsByName("TrangThai")[0].value = data.TrangThai;
             $("#form-submit").attr("action", "/phong/capnhat");
             $("#SoHieuPhong").attr("readonly", "readonly");
             $("#myModal").modal();

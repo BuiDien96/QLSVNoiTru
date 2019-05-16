@@ -21,7 +21,7 @@ namespace QLSVNoiTru.Controllers
             List<SinhVien> sinhViens = db.SinhViens.Where(x => x.TrangThaiO != (int)TrangThaiO.CheckOut).ToList();
             ViewBag.svMoi = db.SinhViens.Where(x => x.NgayNhanPhong.Value.Year == nam && x.NgayNhanPhong.Value.Month == thang).Count();
             ViewBag.tongSV = sinhViens.Count();
-            ViewBag.tongSoPhong = db.Phongs.Count();
+            ViewBag.tongSoPhong = db.Phongs.Where(y => y.TrangThai != null && y.TrangThai.Value).Count();
             float tienDien = 0;
             float tienNuoc = 0;
             if(db.HoaDonDienNuocs.FirstOrDefault(x => x.ThangGhi.Year == nam && x.ThangGhi.Month == thang && x.TrangThai != -1)!= null)

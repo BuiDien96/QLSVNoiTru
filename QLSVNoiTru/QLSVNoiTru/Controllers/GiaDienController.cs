@@ -13,7 +13,7 @@ namespace QLSVNoiTru.Controllers
         // GET: GiaDien
         public ActionResult CapNhatGiaDien()
         {
-            if (!CheckLogin(QuyenDangNhap.BPDienNuoc))
+            if (!CheckLogin())
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             ViewData["giaDiens"] = db.GiaDiens.OrderByDescending(x=>x.NgayCapNhat).ToList();
@@ -23,7 +23,7 @@ namespace QLSVNoiTru.Controllers
         [HttpPost]
         public ActionResult CapNhat(float DonGia)
         {
-            if (!CheckLogin(QuyenDangNhap.BPDienNuoc))
+            if (!CheckLogin())
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             GiaDien giaDien = new GiaDien()
