@@ -158,5 +158,15 @@ namespace QLSVNoiTru.Controllers
             ViewData["phong"] = db.Phongs.FirstOrDefault(x => x.SoHieuPhong == soHieuPhong);
             return View();
         }
+
+        public ActionResult Diennuoctieuthu(string soHieuPhong)
+        {
+            var db = new DB();
+            List<HoaDonDienNuoc> hoaDonDienNuocs = db.HoaDonDienNuocs.Where(x => x.SoHieuPhong == soHieuPhong).OrderByDescending(x => x.ThangGhi).ToList();
+            Phong phong = db.Phongs.FirstOrDefault(x => x.SoHieuPhong == soHieuPhong);
+            ViewData["phong"] = phong;
+            ViewData["hoaDonDienNuocs"] = hoaDonDienNuocs;
+            return View();
+        }
     }
 }

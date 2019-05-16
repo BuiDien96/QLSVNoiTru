@@ -1523,6 +1523,8 @@
     <Content Include="Views\MauBieu\InBienLaiThuPhong.cshtml" />
     <Content Include="Views\MauBieu\InBienLaiThanhLyHopDong.cshtml" />
     <Content Include="Views\MauBieu\InDonXinRaNoiTru.cshtml" />
+    <Content Include="Views\Phong\Diennuoctieuthu.cshtml" />
+    <Content Include="Views\MauBieu\InHoaDonDienNuoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

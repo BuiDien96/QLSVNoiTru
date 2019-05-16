@@ -135,5 +135,33 @@ namespace QLSVNoiTru.Controllers
             ViewData["NoiDung"] = mauBieu.NoiDung;
             return View();
         }
+
+        public ActionResult InHoaDonDienNuoc(int hoadondiennuocId)
+        {
+            var db = new DB();
+            MauBieu mauBieu = db.MauBieux.FirstOrDefault(x => x.LoaiMauBieuId == (int)LoaiMauBieu.PHIEUBAODIENNUOC);
+            HoaDonDienNuoc hoaDonDienNuoc = db.HoaDonDienNuocs.FirstOrDefault(x => x.HoaDonDienNuocId == hoadondiennuocId);
+            DateTime dateTime = DateTime.Now;
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{mahoadon}", hoadondiennuocId.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{ngay}", dateTime.Day.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{thang}", dateTime.Month.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{nam}", dateTime.Year.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{phong}", hoaDonDienNuoc.Phong.SoHieuPhong);
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{thanghoadon}", hoaDonDienNuoc.ThangGhi.ToString("MM-yyyy"));
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{chisodiendau}", hoaDonDienNuoc.Chisodiendau.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{chisodiencuoi}", hoaDonDienNuoc.Chisodiencuoi.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{tieuthu}", (hoaDonDienNuoc.Chisodiencuoi - hoaDonDienNuoc.Chisodiendau).ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{chisonuocdau}", hoaDonDienNuoc.Chisonuocdau.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{chisonuoccuoi}", hoaDonDienNuoc.Chisonuoccuoi.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{tieuthunuoc}", (hoaDonDienNuoc.Chisonuoccuoi - hoaDonDienNuoc.Chisonuocdau).ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{dongiadien}", hoaDonDienNuoc.GiaDien.Dongia.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{dongianuoc}", hoaDonDienNuoc.GiaNuoc.Dongia.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{thanhtiendien}", ((hoaDonDienNuoc.Chisodiencuoi - hoaDonDienNuoc.Chisodiendau) * hoaDonDienNuoc.GiaDien.Dongia).ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{thanhtiennuoc}", ((hoaDonDienNuoc.Chisonuoccuoi - hoaDonDienNuoc.Chisonuocdau) * hoaDonDienNuoc.GiaNuoc.Dongia).ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{tongtien}", hoaDonDienNuoc.TongTien.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{tienbangchu}", TienHelper.Convert_NumtoText(hoaDonDienNuoc.TongTien.ToString()));
+            ViewData["NoiDung"] = mauBieu.NoiDung;
+            return View();
+        }
     }
 }

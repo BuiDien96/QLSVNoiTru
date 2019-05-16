@@ -101,9 +101,13 @@
                                             @(hoaDonDienNuocs[i].TrangThai == -1 ? "Chưa cập nhật" : hoaDonDienNuocs[i].TrangThai == 0 ? "Chưa thanh toán" : "Đã thanh toán")
                                         </td>
                                         <td class="text-center">
-                                            @if (hoaDonDienNuocs[i].TrangThai != 1)
+                                            @if (hoaDonDienNuocs[i].TrangThai == 0)
                                             {
                                                 <a href="/HoaDon/ThanhToanHoaDon?mahoadon=@hoaDonDienNuocs[i].HoaDonDienNuocId&thangghi=@hoaDonDienNuocs[i].ThangGhi.ToString("yyyy/MM/dd")" class="btn btn-success btn-sm">Thanh toán hóa đơn</a>
+                                            }
+                                            else if (hoaDonDienNuocs[i].TrangThai == 1)
+                                            {
+                                                <a target="_blank" href="/MauBieu/InHoaDonDienNuoc?hoadondiennuocId=@hoaDonDienNuocs[i].HoaDonDienNuocId" class="btn btn-primary btn-sm">In hóa đơn</a>
                                             }
 
                                             <input type="hidden" name="hoaDonDienNuocs[@i].ThangGhi" value="@hoaDonDienNuocs[i].ThangGhi.ToString("yyyy/MM/dd")" />

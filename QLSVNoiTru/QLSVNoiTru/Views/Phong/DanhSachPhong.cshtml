@@ -30,7 +30,7 @@
                                 <th class="text-center">Số sinh viên ở</th>
                                 <th class="text-center">Sức chứa tối đa</th>
                                 <th class="text-center">Trạng thái</th>
-                                <th style="width: 200px;"></th>
+                                <th style="width: 280px;"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +46,7 @@
                                     <td class="text-center">
                                         <a href="/Phong/DSSinhVienO?soHieuPhong=@item.SoHieuPhong" class="btn btn-primary btn-sm">DS sinh viên ở</a>
                                         <button onclick="chitiet('@item.SoHieuPhong')" class="btn btn-primary btn-sm">Sửa</button>
+                                        <a href="/Phong/Diennuoctieuthu?soHieuPhong=@item.SoHieuPhong" class="btn btn-success btn-sm">Điện nước</a>
                                     </td>
                                 </tr>
                             }
