@@ -103,6 +103,7 @@
                                         <td class="text-center">
                                             @if (hoaDonDienNuocs[i].TrangThai == 0)
                                             {
+                                                <a target="_blank" href="/MauBieu/InHoaDonDienNuoc?hoadondiennuocId=@hoaDonDienNuocs[i].HoaDonDienNuocId" class="btn btn-primary btn-sm">In hóa đơn</a>
                                                 <a href="/HoaDon/ThanhToanHoaDon?mahoadon=@hoaDonDienNuocs[i].HoaDonDienNuocId&thangghi=@hoaDonDienNuocs[i].ThangGhi.ToString("yyyy/MM/dd")" class="btn btn-success btn-sm">Thanh toán hóa đơn</a>
                                             }
                                             else if (hoaDonDienNuocs[i].TrangThai == 1)
