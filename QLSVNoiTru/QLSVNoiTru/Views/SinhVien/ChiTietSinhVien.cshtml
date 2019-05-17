@@ -58,6 +58,16 @@
                                     <label>Tên sinh viên <span class="required-field">(*)</span></label>
                                     <input required value="@sinhvien.TenSinhVien" name="TenSinhVien" type="text" class="form-control" />
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input value="@sinhvien.SDT" name="SDT" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Ngày sinh <span class="required-field">(*)</span></label>
                                     <input required name="NgaySinh" value="@sinhvien.NgaySinh.ToString("yyyy-MM-dd")" type="date" class="form-control" />
@@ -66,7 +76,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Giới tính <span class="required-field">(*)</span></label>
-                                    <select name="GioiTinh" class="form-control" disabled="disabled">
+                                    <select name="GioiTinh" class="form-control">
                                         <option @(sinhvien.GioiTinh == "Nam" ? "selected" : "") value="Nam">Nam</option>
                                         <option @(sinhvien.GioiTinh != "Nam" ? "selected" : "") value="Nữ">Nữ</option>
                                     </select>
@@ -78,49 +88,43 @@
                                     <input required value="@sinhvien.DanToc" name="DanToc" type="text" class="form-control" />
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Hộ khẩu</label>
-                                    <input value="@sinhvien.HoKhau" name="HoKhau" type="text" class="form-control" />
+                                    <label>Phòng ở</label>
+                                    <input readonly required value="@sinhvien.Phong.SoHieuPhong" name="DanToc" type="text" class="form-control" style="width:250px" />
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Số điện thoại</label>
-                                    <input value="@sinhvien.SDT" name="SDT" type="text" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Ghi chú</label>
-                                    <textarea name="GhiChu" type="text" class="form-control">@sinhvien.GhiChu</textarea>
+                                    <label>Trạng thái ở</label>
+                                    <input readonly required value="@DataHelper.ConvertTrangThaiO(sinhvien.TrangThaiO.Value)" name="DanToc" type="text" class="form-control" style="width:250px" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Phòng ở</label>
-                                    <input readonly required value="@sinhvien.Phong.SoHieuPhong" name="DanToc" type="text" class="form-control" style="width:250px" />
-                                </div>
+                            <div class="form-group">
+                                <label>Hộ khẩu</label>
+                                <input value="@sinhvien.HoKhau" name="HoKhau" type="text" class="form-control" />
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Trạng thái ở</label>
-                                    <input readonly required value="@DataHelper.ConvertTrangThaiO(sinhvien.TrangThaiO.Value)" name="DanToc" type="text" class="form-control" style="width:250px" />
-                                </div>
+                            <div class="form-group">
+                                <label>Ghi chú</label>
+                                <textarea name="GhiChu" type="text" class="form-control" rows="6">@sinhvien.GhiChu</textarea>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Thành tích</label>
-                                    <textarea class="form-control">@sinhvien.KhenThuong</textarea>
-                                </div>
-                                <hr />
+                            <div class="form-group">
+                                <label>Thành tích</label>
+                                <textarea class="form-control" rows="5" readonly="readonly" style="border: none; background-color: inherit;">@sinhvien.KhenThuong</textarea>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Kỷ luật</label>
                                     @foreach (var item in sinhvien.SinhVienKyLuats)
                                     {
-                                        <p><b>- @item.KyLuat.TenKyLuat</b></p>
+                                        if (item.Chon)
+                                        {
+                                            <p><b>Mức @(item.KyLuat.MucDo) - @(item.KyLuat.TenKyLuat)</b></p>
+                                        }
                                     }
                                 </div>
                                 <hr />
@@ -145,7 +149,7 @@
                         <div style="padding:10px;border:1px solid #dcdcdc">
                             <h4>Thông tin đóng tiền phòng ký túc xá</h4>
                             <div>
-                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover datatable">
+                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover" id="thongtinnoptien">
                                     <thead>
                                         <tr>
                                             <th>Từ tháng</th>
@@ -179,6 +183,12 @@
 </div>
 <script>
     $(document).ready(function () {
+        $('#thongtinnoptien').dataTable({
+            bFilter: false,
+            bInfo: false,
+            bLengthChange: false,
+            bSort: false
+        });
         function setFileField(fileUrl) {
             $('#' + $(upload).attr('for')).val(fileUrl);
             $("#img-logo").attr("src", fileUrl);

@@ -45,98 +45,102 @@
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#tongquan">Tổng quan phòng KTX</a></li>
-                            <li><a data-toggle="tab" href="#sinhvienolai">Chọn sinh viên ở lại</a></li>
                         </ul>
 
-                        <div class="tab-content" style="max-height: 500px;overflow-y: auto;overflow-x:hidden">
-                            <div id="tongquan" class="tab-pane fade in active">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        @for (int i = 0; i < eTangs.Count; i++)
-                                        {
-                                            <div class="box-tang">
-                                                <div class="row">
-                                                    <div class="col-xs-2">
-                                                        <div style="padding:10px">
-                                                            <b>@eTangs[i].TenTang</b>
-                                                        </div>
+                        @*<div class="tab-content" style="max-height: 500px;overflow-y: auto;overflow-x:hidden">*@
+                        <div id="tongquan" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @for (int i = 0; i < eTangs.Count; i++)
+                                    {
+                                        <div class="box-tang">
+                                            <div class="row">
+                                                <div class="col-xs-2">
+                                                    <div style="padding:10px">
+                                                        <b>@eTangs[i].TenTang</b>
                                                     </div>
-                                                    <div class="col-xs-10">
-                                                        <div class="row" style="margin: 0;">
-                                                            @for (int j = 0; j < eTangs[i].Phongs.Count; j++)
-                                                            {
-                                                                <div class="col-md-2 text-center" style="padding: 0;">
-                                                                    <div class="box-phong">
-                                                                        <h4>
-                                                                            <b>@eTangs[i].Phongs[j].SoHieuPhong</b>
-                                                                        </h4>
-                                                                        <p>@eTangs[i].Phongs[j].LoaiPhong.TenLoaiPhong</p>
-                                                                        <p>@eTangs[i].Phongs[j].SoPhongDaO / @eTangs[i].Phongs[j].SucChuaToiDa</p>
-                                                                        <p>
-                                                                            @if (eTangs[i].Phongs[j].SoPhongDaO < eTangs[i].Phongs[j].SucChuaToiDa)
-                                                                            {
-                                                                                <button type="button" class="btn btn-primary btn-sm">Còn giường trống</button>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <button type="button" class="btn btn-danger btn-sm">Phòng đã đầy</button>
-                                                                            }
-                                                                        </p>
-                                                                    </div>
+                                                </div>
+                                                <div class="col-xs-10">
+                                                    <div class="row" style="margin: 0;">
+                                                        @for (int j = 0; j < eTangs[i].Phongs.Count; j++)
+                                                        {
+                                                            <div class="col-md-2 text-center" style="padding: 0;">
+                                                                <div class="box-phong">
+                                                                    <h4>
+                                                                        <b>@eTangs[i].Phongs[j].SoHieuPhong</b>
+                                                                    </h4>
+                                                                    <p>@eTangs[i].Phongs[j].LoaiPhong.TenLoaiPhong</p>
+                                                                    <p>@eTangs[i].Phongs[j].SoPhongDaO / @eTangs[i].Phongs[j].SucChuaToiDa</p>
+                                                                    <p>
+                                                                        @if (eTangs[i].Phongs[j].SoPhongDaO < eTangs[i].Phongs[j].SucChuaToiDa)
+                                                                        {
+                                                                            <button type="button" class="btn btn-primary btn-sm">Còn giường trống</button>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <button type="button" class="btn btn-danger btn-sm">Phòng đã đầy</button>
+                                                                        }
+                                                                    </p>
                                                                 </div>
-                                                            }
-                                                        </div>
+                                                            </div>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
-                            <div id="sinhvienolai" class="tab-pane fade">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h4>Danh sách sinh viên</h4>
-                                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover datatable">
-                                            <thead>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Danh sách sinh viên chưa nộp tiền</h4>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover datatable-without-paginate">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">
+                                                    <input type="checkbox" id="checkout-all" />
+                                                    Checkout?
+                                                </th>
+                                                <th>Mã sinh viên</th>
+                                                <th>Tên sinh viên</th>
+                                                <th>Tên khoa</th>
+                                                <th>Tên lớp</th>
+                                                <th>Số hiệu phòng</th>
+                                                <th>Giới tính</th>
+                                                <th>Ngày nhận phòng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int i = 0; i < eSinhViens.Count; i++)
+                                            {
                                                 <tr>
-                                                    <th class="text-center">Chọn</th>
-                                                    <th>Mã sinh viên</th>
-                                                    <th>Tên sinh viên</th>
-                                                    <th>Tên khoa</th>
-                                                    <th>Tên lớp</th>
-                                                    <th>Số hiệu phòng</th>
-                                                    <th>Giới tính</th>
-                                                    <th>Ngày nhận phòng</th>
+                                                    <td class="text-center">
+                                                        <input type="hidden" name="eSinhViens[@i].MaSinhVien" value="@eSinhViens[i].SinhVien.MaSinhVien" />
+                                                        <input type="checkbox" name="eSinhViens[@i].Chon" @(eSinhViens[i].Chon ? "checked" : "") class="checkout-selected" value="true"/>
+                                                        @*<input type="checkbox" @(eSinhViens[i].Chon ? "checked" : "") name="eSinhViens[@i].Chon" value="true" />*@
+                                                    </td>
+                                                    <td>@eSinhViens[i].SinhVien.MaSinhVien</td>
+                                                    <td>@eSinhViens[i].SinhVien.TenSinhVien</td>
+                                                    <td>@eSinhViens[i].SinhVien.Lop.Khoa.TenKhoa</td>
+                                                    <td>@eSinhViens[i].SinhVien.Lop.TenLop</td>
+                                                    <td>@eSinhViens[i].SinhVien.SoHieuPhong</td>
+                                                    <td>@eSinhViens[i].SinhVien.GioiTinh</td>
+                                                    <td>@eSinhViens[i].SinhVien.NgayNhanPhong.Value.ToString("dd/MM/yyyy HH:mm")</td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                @for (int i = 0; i < eSinhViens.Count; i++)
-                                                {
-                                                    <tr>
-                                                        <td class="text-center">
-                                                            <input type="hidden" name="eSinhViens[@i].MaSinhVien" value="@eSinhViens[i].SinhVien.MaSinhVien" />
-                                                            <input type="checkbox" @(eSinhViens[i].Chon ? "checked" : "") name="eSinhViens[@i].Chon" value="true" />
-                                                        </td>
-                                                        <td>@eSinhViens[i].SinhVien.MaSinhVien</td>
-                                                        <td>@eSinhViens[i].SinhVien.TenSinhVien</td>
-                                                        <td>@eSinhViens[i].SinhVien.Lop.Khoa.TenKhoa</td>
-                                                        <td>@eSinhViens[i].SinhVien.Lop.TenLop</td>
-                                                        <td>@eSinhViens[i].SinhVien.SoHieuPhong</td>
-                                                        <td>@eSinhViens[i].SinhVien.GioiTinh</td>
-                                                        <td>@eSinhViens[i].SinhVien.NgayNhanPhong.Value.ToString("dd/MM/yyyy HH:mm")</td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 text-center" style="margin-top:20px">
-                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Cập nhật</button>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;" onclick="return confirm('Bạn có chắc chắn muốn checkout các sinh viên đã chọn?');">
+                            Checkout sinh viên đã chọn
+                        </button>
                     </div>
+                    @*</div>*@
+
                 </div>
             </div>
             <!-- END: CONTENT -->
@@ -144,3 +148,39 @@
 
     </form>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.datatable-without-paginate').dataTable({
+            bPaginate: false
+        });
+
+        $('#checkout-all').on('click', function () {
+            var status = $(this).prop('checked');
+            $('.checkout-selected').each(function () {
+                $(this).prop('checked', status);
+                if (status == true) {
+                    $(this).closest('span').addClass('checked');
+                } else {
+                    $(this).closest('span').removeClass('checked');
+                }
+            });
+        });
+
+        $('.checkout-selected').on('click', function () {
+            var all_selected = true;
+            $('.checkout-selected').each(function () {
+                if ($(this).prop('checked') === false) {
+                    all_selected = false;
+                    return false;
+                }
+            });
+            if (all_selected === true) {
+                $('#checkout-all').closest('span').addClass('checked');
+            } else {
+                $('#checkout-all').closest('span').removeClass('checked');
+            }
+            $('#checkout-all').prop('checked', all_selected);
+        });
+    });
+</script>

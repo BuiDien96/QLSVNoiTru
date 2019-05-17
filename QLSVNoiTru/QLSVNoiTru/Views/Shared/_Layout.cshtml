@@ -153,7 +153,7 @@
                         </ul>
                     </li>
                 }
-                @if (quyen == QuyenDangNhap.BPQuanLy)
+                @if (quyen == QuyenDangNhap.BPHeThong)
                 {
                     <li id="MAUBIEU">
                         <a href="/MauBieu/DanhSachMauBieu">
@@ -161,7 +161,7 @@
                         </a>
                     </li>
                 }
-                @if (quyen == QuyenDangNhap.BPQuanLy)
+                @if (quyen == QuyenDangNhap.BPHeThong)
                 {
                     <li id="QUANLYTAIKHOAN">
                         <a href="/NguoiDung/DanhSachTaiKhoan">
@@ -176,12 +176,12 @@
                             <i class="fa fa-gear"></i> Quản lý <i class="caret"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            @*<li>
+                            <li>
                                 <a href="/quanly/khoitaophongktxmoi">
                                     <i class="fa fa-circle-o"></i>
                                     <span> Khởi tạo phòng KTX mới </span>
                                 </a>
-                            </li>*@
+                            </li>
                             <li>
                                 <a href="/kytucxa/ManHinhKyTucXa">
                                     <i class="fa fa-circle-o"></i>
@@ -247,6 +247,9 @@
     <style>
         .form-control {
             border-color: lightgray;
+        }
+        textarea {
+            resize: none;
         }
     </style>
 </body>

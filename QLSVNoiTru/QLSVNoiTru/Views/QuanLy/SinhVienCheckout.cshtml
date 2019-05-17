@@ -126,7 +126,10 @@
                                             <label>Kỷ luật</label>
                                             @foreach (var item in sinhvien.SinhVienKyLuats)
                                             {
-                                                <p><b>- @item.KyLuat.TenKyLuat</b></p>
+                                                if (item.Chon)
+                                                {
+                                                    <p><b>Mức @(item.KyLuat.MucDo) - @(item.KyLuat.TenKyLuat)</b></p>
+                                                }
                                             }
                                         </div>
                                         <hr />

@@ -93,7 +93,8 @@ namespace QLSVNoiTru.Controllers
                     sinhVien.HoKhau,
                     sinhVien.SDT,
                     sinhVien.GhiChu,
-                    sinhVien.TrangThaiO
+                    sinhVien.TrangThaiO,
+                    sinhVien.HinhAnh
                 });
             }
             return Json(new
@@ -113,7 +114,7 @@ namespace QLSVNoiTru.Controllers
             {
                 sinhVien.NgayNhanPhong = DateTime.Now;
                 sinhVien.TrangThaiO = (int)TrangThaiO.DangO;
-                sinhVien.NgayNhanPhong = new DateTime(TuThang.Year, TuThang.Month, 1);
+                sinhVien.NgayNhanPhong = new DateTime(TuThang.Year, TuThang.Month, TuThang.Day);
                 db.SinhViens.Add(sinhVien);
             }
             else
@@ -132,7 +133,7 @@ namespace QLSVNoiTru.Controllers
                     sinhVienOld.TenSinhVien = sinhVien.TenSinhVien;
                     sinhVienOld.SoHieuPhong = sinhVien.SoHieuPhong;
                     sinhVienOld.TrangThaiO = (int)TrangThaiO.DangO;
-                    sinhVienOld.NgayNhanPhong = new DateTime(TuThang.Year, TuThang.Month, 1);
+                    sinhVienOld.NgayNhanPhong = TuThang;
                 }
             }
             db.PhiPhongs.Add(new PhiPhong()

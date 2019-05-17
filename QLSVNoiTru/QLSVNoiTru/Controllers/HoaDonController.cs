@@ -12,11 +12,13 @@ namespace QLSVNoiTru.Controllers
         // GET: HoaDon
         public ActionResult DanhSachHoaDonDienNuoc(DateTime? date = null)
         {
-            if (!CheckLogin())
+            if (!CheckLogin(QuyenDangNhap.BPDienNuoc))
                 return Redirect("/Login/DangNhap");
             List<HoaDonDienNuoc> hoaDonDienNuocs = new List<HoaDonDienNuoc>();
             var db = new DB();
-            if (date == null) date = DateTime.Now.Date;
+            Console.WriteLine(date);
+            if (date == null)
+                date = DateTime.Now.Date;
             else
                 date = date.Value.Date;
 
@@ -65,7 +67,7 @@ namespace QLSVNoiTru.Controllers
         [HttpPost]
         public ActionResult CapNhatHoaDon(List<HoaDonDienNuoc> hoaDonDienNuocs, string thangghi)
         {
-            if (!CheckLogin())
+            if (!CheckLogin(QuyenDangNhap.BPDienNuoc))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             DateTime dateTimeNow = DateTime.Now;
@@ -110,7 +112,7 @@ namespace QLSVNoiTru.Controllers
 
         public ActionResult ThanhToanHoaDon(int mahoadon, DateTime thangghi)
         {
-            if (!CheckLogin())
+            if (!CheckLogin(QuyenDangNhap.BPDienNuoc))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             HoaDonDienNuoc hoaDonDienNuoc = db.HoaDonDienNuocs.FirstOrDefault(x => x.HoaDonDienNuocId == mahoadon);

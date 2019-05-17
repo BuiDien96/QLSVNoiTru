@@ -18,7 +18,8 @@
     <div class="login-wrap">
         <div class="panel">
             <div class="panel-heading">
-                <h3 class="panel-title">Đăng nhập</h3>
+                <img src="/Plugins/img/logo.png" alt="logo" style="width: 70%; margin-left: 50px;"/>
+                <h3 class="panel-title" style="margin-top: 40px; font-weight: bold; text-align: center;">Đăng nhập</h3>
                 @if (Session["error"] != null)
                 {
                 <h5 style="color:red">@Session["error"]</h5>
@@ -30,8 +31,9 @@
                         <label>Đăng nhập với quyền</label>
                         <div>
                             <select name="Quyen" class="form-control">
-                                <option value="1">BP quản lý</option>
-                                <option value="2">BP điện nước</option>
+                                <option value="0">Quản lý hệ thống</option>
+                                <option value="1">Quản lý thông tin</option>
+                                <option value="2">Quản lý điện nước</option>
                             </select>
                         </div>
                     </div>

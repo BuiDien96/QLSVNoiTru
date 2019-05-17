@@ -12,7 +12,7 @@ namespace QLSVNoiTru.Controllers
         // GET: MauBieu
         public ActionResult DanhSachMauBieu()
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin(QuyenDangNhap.BPHeThong))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             List<MauBieu> mauBieus = db.MauBieux.ToList();
@@ -22,7 +22,7 @@ namespace QLSVNoiTru.Controllers
 
         public ActionResult Chitiet(int maubieuId)
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin(QuyenDangNhap.BPHeThong))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             MauBieu mauBieu = db.MauBieux.FirstOrDefault(x => x.MauBieuId == maubieuId);
@@ -33,7 +33,7 @@ namespace QLSVNoiTru.Controllers
         [ValidateInput(false)]
         public ActionResult CapNhat(MauBieu mauBieu)
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin(QuyenDangNhap.BPHeThong))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             MauBieu mauBieuOld = db.MauBieux.FirstOrDefault(x => x.MauBieuId == mauBieu.MauBieuId);
