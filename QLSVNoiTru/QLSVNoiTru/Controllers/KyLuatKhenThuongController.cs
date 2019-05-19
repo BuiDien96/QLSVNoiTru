@@ -15,7 +15,7 @@ namespace QLSVNoiTru.Controllers
                 return Redirect("/Login/DangNhap");
             ViewBag.masinhvien = masinhvien;
             var db = new DB();
-            SinhVien sinhVien = db.SinhViens.FirstOrDefault(x => x.MaSinhVien == masinhvien);
+            SinhVien sinhVien = db.SinhViens.FirstOrDefault(x => x.MaSinhVien == masinhvien && x.TrangThaiO != (int)TrangThaiO.CheckOut);
             ViewData["sinhVien"] = sinhVien;
             return View();
         }
@@ -25,7 +25,7 @@ namespace QLSVNoiTru.Controllers
                 return Redirect("/Login/DangNhap");
             ViewBag.masinhvien = masinhvien;
             var db = new DB();
-            SinhVien sinhVien = db.SinhViens.FirstOrDefault(x => x.MaSinhVien == masinhvien);
+            SinhVien sinhVien = db.SinhViens.FirstOrDefault(x => x.MaSinhVien == masinhvien && x.TrangThaiO != (int)TrangThaiO.CheckOut);
             List<SinhVienKyLuat> sinhVienKyLuats = new List<SinhVienKyLuat>();
             if (mucdo == 0)
             {

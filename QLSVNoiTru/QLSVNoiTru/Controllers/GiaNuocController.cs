@@ -17,7 +17,7 @@ namespace QLSVNoiTru.Controllers
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             ViewData["giaNuocs"] = db.GiaNuocs.OrderByDescending(x => x.NgayCapNhat).ToList();
-            return View();
+            return View();         
         }
 
         [HttpPost]

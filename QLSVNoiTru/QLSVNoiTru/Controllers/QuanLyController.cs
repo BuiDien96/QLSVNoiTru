@@ -3,6 +3,7 @@ using QLSVNoiTru.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System;
 
 namespace QLSVNoiTru.Controllers
 {
@@ -42,16 +43,27 @@ namespace QLSVNoiTru.Controllers
                 eTangs.Add(eTang);
             });
             List<ESinhVien> eSinhViens = new List<ESinhVien>();
-            List<SinhVien> sinhViens = db.SinhViens.OrderByDescending(x => x.NgayNhanPhong).ToList();
+            DateTime currentDate = DateTime.Now;
+            List<SinhVien> sinhViens = db.SinhViens.Where(x=>x.TrangThaiO == (int)TrangThaiO.DangO).ToList();
             sinhViens.ForEach(x =>
             {
-                bool svOLai = db.SinhVienOLais.Any(y => y.MaSinhVien == x.MaSinhVien);
-                eSinhViens.Add(new ESinhVien()
+                PhiPhong phiPhongCuoiCung = x.PhiPhongs.Where(y => y.TrangThai == true && y.Thang <= currentDate && y.DenThang >= currentDate).OrderByDescending(z => z.DenThang).FirstOrDefault();
+                if (phiPhongCuoiCung is null)
                 {
-                    SinhVien = x,
-                    Chon = svOLai,
-                    MaSinhVien = x.MaSinhVien
-                });
+                    eSinhViens.Add(new ESinhVien()
+                    {
+                        SinhVien = x,
+                        Chon = false,
+                        MaSinhVien = x.MaSinhVien
+                    });
+                }
+                //bool svOLai = db.SinhVienOLais.Any(y => y.MaSinhVien == x.MaSinhVien);
+                //eSinhViens.Add(new ESinhVien()
+                //{
+                //    SinhVien = x,
+                //    Chon = false,
+                //    MaSinhVien = x.MaSinhVien
+                //});
             });
 
             ViewData["eTangs"] = eTangs;
@@ -65,23 +77,40 @@ namespace QLSVNoiTru.Controllers
             if (!CheckLogin(QuyenDangNhap.BPQuanLy))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
+            DateTime currentDate = DateTime.Now;
             db.SinhVienOLais.RemoveRange(db.SinhVienOLais);
             List<SinhVien> sinhViens = db.SinhViens.Where(x => x.TrangThaiO == (int)TrangThaiO.DangO).ToList();
+            //sinhViens.ForEach(x =>
+            //{
+            //    if (eSinhViens.Any(y => y.MaSinhVien == x.MaSinhVien && y.Chon))
+            //        x.TrangThaiO = (int)TrangThaiO.ChoNhanPhongMoi;
+            //    else
+            //        x.TrangThaiO = (int)TrangThaiO.CheckOut;
+            //});
+            //eSinhViens.ForEach(x =>
+            //{
+            //    if (x.Chon)
+            //    {
+            //        db.SinhVienOLais.Add(new SinhVienOLai()
+            //        {
+            //            MaSinhVien = x.MaSinhVien
+            //        });
+            //    }
+            //});
             sinhViens.ForEach(x =>
             {
                 if (eSinhViens.Any(y => y.MaSinhVien == x.MaSinhVien && y.Chon))
-                    x.TrangThaiO = (int)TrangThaiO.ChoNhanPhongMoi;
-                else
-                    x.TrangThaiO = (int)TrangThaiO.CheckOut;
-            });
-            eSinhViens.ForEach(x =>
-            {
-                if (x.Chon)
                 {
-                    db.SinhVienOLais.Add(new SinhVienOLai()
+                    PhiPhong phiPhongCuoiCung = x.PhiPhongs.Where(y => y.TrangThai == true && y.Thang <= currentDate && y.DenThang >= currentDate).OrderByDescending(z => z.DenThang).FirstOrDefault();
+                    if (phiPhongCuoiCung is null)
                     {
-                        MaSinhVien = x.MaSinhVien
-                    });
+                        x.TrangThaiO = (int)TrangThaiO.CheckOut;
+                        x.KhenThuong = "";
+                        foreach (var item in x.SinhVienKyLuats)
+                        {
+                            item.Chon = false;
+                        }
+                    }
                 }
             });
             db.SaveChanges();
@@ -110,6 +139,11 @@ namespace QLSVNoiTru.Controllers
             if (sinhVien != null)
             {
                 sinhVien.TrangThaiO = (int)TrangThaiO.CheckOut;
+                sinhVien.KhenThuong = "";
+                foreach (var item in sinhVien.SinhVienKyLuats)
+                {
+                    item.Chon = false;
+                }
                 db.SaveChanges();
             }
             return RedirectToAction("SinhVienCheckout");

@@ -10,7 +10,7 @@ namespace QLSVNoiTru.Controllers
         // GET: NguoiDung
         public ActionResult DanhSachTaiKhoan()
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin(QuyenDangNhap.BPHeThong))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             ViewData["users"] = db.Users.ToList();
@@ -19,7 +19,7 @@ namespace QLSVNoiTru.Controllers
 
         public JsonResult KiemTraTrung(string username)
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin(QuyenDangNhap.BPHeThong))
                 return Json("");
             var db = new DB();
             bool result = db.Users.Any(x => x.UserName == username);
@@ -32,7 +32,7 @@ namespace QLSVNoiTru.Controllers
         [HttpPost]
         public ActionResult ThemMoi(User user)
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin(QuyenDangNhap.BPHeThong))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             user.Password = DataHelper.MD5(user.Password);
@@ -44,7 +44,7 @@ namespace QLSVNoiTru.Controllers
 
         public JsonResult ChiTiet(string username)
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin(QuyenDangNhap.BPHeThong))
                 return Json("");
             var db = new DB();
             User user = db.Users.FirstOrDefault(x => x.UserName == username);
@@ -60,7 +60,7 @@ namespace QLSVNoiTru.Controllers
         [HttpPost]
         public ActionResult CapNhat(User user)
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin(QuyenDangNhap.BPHeThong))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             User userCu = db.Users.FirstOrDefault(x => x.UserName == user.UserName);
@@ -79,8 +79,8 @@ namespace QLSVNoiTru.Controllers
 
         public ActionResult Thongtintaikhoan()
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
-                return Redirect("/Login/DangNhap");
+            //if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            //    return Redirect("/Login/DangNhap");
             User user = (User)Session["user"];
             ViewData["user"] = user;
             return View();
@@ -88,7 +88,7 @@ namespace QLSVNoiTru.Controllers
         [HttpPost]
         public ActionResult Capnhatthongtincanhan(User user)
         {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+            if (!CheckLogin(QuyenDangNhap.BPHeThong))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             User userCu = db.Users.FirstOrDefault(x => x.UserName == user.UserName);

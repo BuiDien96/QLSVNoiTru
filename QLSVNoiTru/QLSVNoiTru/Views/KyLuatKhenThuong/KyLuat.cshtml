@@ -33,16 +33,19 @@
                                 </div>
                             </div>
                             <div class="col-md-7">
-                                <div class="form-group">
-                                    <label>Mức độ cảnh cáo</label>
-                                    <select onchange="$('#form-search').submit()" name="mucdo" class="form-control" style="max-width:250px">
-                                        <option @(ViewBag.mucdo == 0 ? "selected" : "") value="0">Chọn..</option>
-                                        <option @(ViewBag.mucdo == 1 ? "selected" : "") value="1">Mức 1</option>
-                                        <option @(ViewBag.mucdo == 2 ? "selected" : "") value="2">Mức 2</option>
-                                        <option @(ViewBag.mucdo == 3 ? "selected" : "") value="3">Mức 3</option>
-                                        <option @(ViewBag.mucdo == 4 ? "selected" : "") value="4">Mức 4</option>
-                                    </select>
-                                </div>
+                                @if (sinhvien != null)
+                                {
+                                    <div class="form-group">
+                                        <label>Mức độ cảnh cáo</label>
+                                        <select onchange="$('#form-search').submit()" name="mucdo" class="form-control" style="max-width:250px">
+                                            <option @(ViewBag.mucdo == 0 ? "selected" : "") value="0">Chọn..</option>
+                                            <option @(ViewBag.mucdo == 1 ? "selected" : "") value="1">Mức 1</option>
+                                            <option @(ViewBag.mucdo == 2 ? "selected" : "") value="2">Mức 2</option>
+                                            <option @(ViewBag.mucdo == 3 ? "selected" : "") value="3">Mức 3</option>
+                                            <option @(ViewBag.mucdo == 4 ? "selected" : "") value="4">Mức 4</option>
+                                        </select>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </form>

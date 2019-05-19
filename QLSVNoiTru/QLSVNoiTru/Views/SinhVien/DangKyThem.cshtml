@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-9">
 
                                 <div class="row">
                                     <div class="col-md-2">
@@ -74,8 +74,10 @@
                                         </div>
                                         <div class="form-group" style="overflow: hidden;">
                                             <label style="display:block">Mã sinh viên <span class="required-field">(*)</span></label>
-                                            <input id="MaSinhVien" required type="text" name="MaSinhVien" class="form-control" style="max-width:250px;float:left" />
-                                            <button type="button" onclick="kiemtrasinhvien()" class="btn btn-primary" style="float:right">Kiểm tra</button>
+                                            <div class="form-group" stype="display: inline-flex;">
+                                                <input id="MaSinhVien" required type="text" name="MaSinhVien" class="form-control" style="width: 140px; float: left;" />
+                                                <button type="button" onclick="kiemtrasinhvien()" class="btn btn-primary" style="height: 34px; float: right;">Kiểm tra</button>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Tên sinh viên <span class="required-field">(*)</span></label>
@@ -110,28 +112,28 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Ghi chú</label>
-                                            <textarea name="GhiChu" type="text" class="form-control"></textarea>
+                                            <textarea name="GhiChu" type="text" class="form-control" style="width: 100%; resize: none;"></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div style="padding:10px;border:1px solid #dcdcdc">
                                     <h4>Thời gian đăng ký ở</h4>
                                     <div class="form-group">
-                                        <label>Từ ngày</label>
+                                        <label>Từ tháng</label>
                                         <div>
-                                            <input required type="month" name="TuThang" value="" class="form-control" />
+                                            <input required name="TuThang" value="" type="date" class="form-control" />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Đến ngày</label>
+                                        <label>Đến tháng</label>
                                         <div>
-                                            <input required type="month" name="DenThang" value="" class="form-control" />
+                                            <input required name="DenThang" value="" type="date" class="form-control" />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Số tiền</label>
+                                        <label>Số tiền (VNĐ)</label>
                                         <div>
                                             <input required type="text" name="TienPhi" value="" class="form-control" />
                                         </div>
@@ -208,7 +210,7 @@
         $("#SoHieuPhong").val(sohieuphong);
     }
     function ThayDoiGioiTinh() {
-        location.href = "/SinhVien/DangKyNoiTru?gioitinh=" + document.getElementsByName("GioiTinh")[0].value
+        location.href = "/SinhVien/DangKyThem?gioitinh=" + document.getElementsByName("GioiTinh")[0].value;
     }
     function inHopDongNoiTru() {
         let MaSinhVien = document.getElementsByName("MaSinhVien")[0].value;
@@ -253,13 +255,14 @@
         let TenSinhVien = document.getElementsByName("TenSinhVien")[0].value;
         let TuThang = document.getElementsByName("TuThang")[0].value;
         let DenThang = document.getElementsByName("DenThang")[0].value;
+        let SoTien = document.getElementsByName("TienPhi")[0].value;
         if (validate(MaSinhVien) || validate(TenSinhVien) || validate(TuThang) || validate(DenThang)) {
             alert("Thông tin sinh viên cần nhập đầy đủ (Thông tin bao gồm: Mã sinh viên, Tên sinh viên, Phòng,Từ tháng, Đến tháng)");
             return
         }
         else {
             let prm = 'MaSinhVien=' + MaSinhVien + '&TenSinhVien=' + TenSinhVien + '&Phong=' + $("#SoHieuPhong").val()
-                + '&TuThang=' + TuThang + '&DenThang=' + DenThang;
+                + '&TuThang=' + TuThang + '&DenThang=' + DenThang + '&SoTien=' + SoTien;
             window.open('/SinhVien/InBienLaiThuTienPhong?' + prm, '_blank');
         }
     }
@@ -310,6 +313,16 @@
         });
     }
     $(document).ready(function () {
+        $('input[name="NgaySinh"]').prop('max', function () {
+            return new Date().toJSON().split('T')[0];
+        });
+
+        $('.datepicker-select-month').datepicker({
+            format: "mm/yyyy",
+            startView: "months",
+            minViewMode: "months"
+        });
+
         $("#form-submit").on('submit', function (e) {
             if (!acceptSubmit) {
                 e.preventDefault();
@@ -340,7 +353,7 @@
                 });
             }
         });
-        
+
         function setFileField(fileUrl) {
             $('#' + $(upload).attr('for')).val(fileUrl);
             $("#img-logo").attr("src", fileUrl);

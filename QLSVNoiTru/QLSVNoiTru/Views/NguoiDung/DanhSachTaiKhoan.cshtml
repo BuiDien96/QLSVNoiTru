@@ -38,7 +38,7 @@
                                     <td>@item.UserName</td>
                                     <td>@item.FullName</td>
                                     <td>@item.Email</td>
-                                    <td>@(item.Quyen == 1?"BP Quản lý":"BP Điện nước")</td>
+                                    <td>@(item.Quyen == 1?"Quản lý thông tin":"Quản lý điện nước")</td>
                                     <td class="text-center">@(item.Status?"Hoạt động":"Đã khóa")</td>
                                     <td class="text-center">
                                         <button onclick="chitiet('@item.UserName')" class="btn btn-primary btn-sm">Sửa</button>
@@ -68,8 +68,8 @@
                                 <label>Quyền <span class="required-field">(*)</span></label>
                                 <select name="Quyen" class="form-control" required>
                                     <option value="">Chọn...</option>
-                                    <option value="1">BP Quản lý</option>
-                                    <option value="2">BP Điện nước</option>
+                                    <option value="1">Quản lý thông tin</option>
+                                    <option value="2">Quản lý điện nước</option>
                                 </select>
                             </div>
                             <div class="form-group">

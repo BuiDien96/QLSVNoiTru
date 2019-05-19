@@ -14,6 +14,7 @@ namespace QLSVNoiTru.Controllers
         {
             if (!CheckLogin())
                 return Redirect("/Login/DangNhap");
+
             DateTime dateTimeNow = DateTime.Now;
             int nam = dateTimeNow.Year;
             int thang = dateTimeNow.Month;

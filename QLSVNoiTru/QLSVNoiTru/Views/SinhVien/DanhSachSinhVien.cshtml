@@ -12,7 +12,7 @@
         <div class="header">
             <div class="col-md-12">
                 <h4 class="header-title">Danh sách sinh viên</h4>
-                <a href="/SinhVien/DangKyNoiTru" class="btn btn-primary pull-right" style="margin-top: 10px;">Đăng ký nội trú</a>
+                <a href="/SinhVien/DangKyThem" class="btn btn-primary pull-right" style="margin-top: 10px;">Đăng ký nội trú</a>
             </div>
         </div>
         <!-- CONTENT -->
@@ -45,7 +45,7 @@
                                     <td>@item.SoHieuPhong</td>
                                     <td>@item.NgaySinh.ToString("dd/MM/yyyy")</td>
                                     <td>@item.GioiTinh</td>
-                                    <td>@item.NgayNhanPhong.Value.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>@item.NgayNhanPhong.Value.ToString("dd/MM/yyyy")</td>
                                     <td class="text-center">@DataHelper.ConvertTrangThaiO(item.TrangThaiO.Value)</td>
                                     <td class="text-center">
                                         <a href="/SinhVien/ChiTietSinhVien?masinhvien=@item.MaSinhVien" class="btn btn-primary btn-sm">Chi tiết</a>

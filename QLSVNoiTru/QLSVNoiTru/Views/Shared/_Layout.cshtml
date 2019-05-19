@@ -2,10 +2,12 @@
 @using QLSVNoiTru.Models;
 @{
     int quyen = 1;
+    string fullName = "ADMIN";
     if (Session["user"] != null)
     {
         User user = (User)Session["user"];
         quyen = user.Quyen;
+        fullName = user.FullName;
     }
 }
 <!DOCTYPE html>
@@ -52,7 +54,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle avatar pull-right" data-toggle="dropdown">
                         <img src="/Plugins/img/users/mike.jpg" alt="mike" class="img-avatar" />
-                        <span class="hidden-small">Admin<b class="caret"></b></span>
+                        <span class="hidden-small">@(fullName)<b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu pull-right">
                         <li>
@@ -83,12 +85,13 @@
                 {
                     <li id="DANGKYNOITRU" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-recycle"></i> Đang ký nội trú <i class="caret"></i>
+                            <i class="fa fa-recycle"></i> Đăng ký nội trú <i class="caret"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/SinhVien/DangKyNoiTru"><i class="fa fa-circle-o"></i><span> Đăng ký nội trú </span></a></li>
-                            <li><a href="/SinhVien/DangKyNoiTruNhanh"><i class="fa fa-circle-o"></i><span> Đăng ký nhanh cho sv ở lại </span></a></li>
+                            @*<li><a href="/SinhVien/DangKyNoiTru"><i class="fa fa-circle-o"></i><span> Đăng ký nội trú </span></a></li>*@
                             <li><a href="/SinhVien/DangKyThem"><i class="fa fa-circle-o"></i><span> Đăng ký thêm nội trú </span></a></li>
+                            @*<li><a href="/SinhVien/DangKyNoiTruNhanh"><i class="fa fa-circle-o"></i><span> Đăng ký nhanh cho sv ở lại </span></a></li>*@
+
                         </ul>
                     </li>
                 }
@@ -114,28 +117,30 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/SinhVien/DanhSachSinhVien"><i class="fa fa-circle-o"></i><span> Danh sách sinh viên </span></a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i><span> Hoạt động nội trú </span></a></li>
+                            @*<li><a href="#"><i class="fa fa-circle-o"></i><span> Hoạt động nội trú </span></a></li>*@
                             <li><a href="/SinhVien/ChuyenPhong"><i class="fa fa-circle-o"></i><span> Chuyển phòng </span></a></li>
                         </ul>
                     </li>
                 }
+                @if (quyen == QuyenDangNhap.BPDienNuoc)
+                {
+                    <li id="DIENNUOC" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bar-chart-o"></i> Giá điện nước <i class="caret"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/GiaDien/CapNhatGiaDien"><i class="fa fa-circle-o"></i><span> Giá điện </span></a></li>
+                            <li><a href="/GiaNuoc/CapNhatGiaNuoc"><i class="fa fa-circle-o"></i><span> Giá nước </span></a></li>
+                        </ul>
+                    </li>
 
-                <li id="DIENNUOC" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bar-chart-o"></i> Giá điện nước <i class="caret"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/GiaDien/CapNhatGiaDien"><i class="fa fa-circle-o"></i><span> Giá điện </span></a></li>
-                        <li><a href="/GiaNuoc/CapNhatGiaNuoc"><i class="fa fa-circle-o"></i><span> Giá nước </span></a></li>
-                    </ul>
-                </li>
 
-
-                <li id="HOADON">
-                    <a href="/HoaDon/DanhSachHoaDonDienNuoc">
-                        <i class="fa fa-calendar-minus-o"></i> Hóa đơn
-                    </a>
-                </li>
+                    <li id="HOADON">
+                        <a href="/HoaDon/DanhSachHoaDonDienNuoc">
+                            <i class="fa fa-calendar-minus-o"></i> Hóa đơn
+                        </a>
+                    </li>
+                }
                 @if (quyen == QuyenDangNhap.BPQuanLy)
                 {
                     <li id="KHENTHUONGKYLUAT" class="dropdown">
@@ -148,7 +153,7 @@
                         </ul>
                     </li>
                 }
-                @if (quyen == QuyenDangNhap.BPQuanLy)
+                @if (quyen == QuyenDangNhap.BPHeThong)
                 {
                     <li id="MAUBIEU">
                         <a href="/MauBieu/DanhSachMauBieu">
@@ -156,7 +161,7 @@
                         </a>
                     </li>
                 }
-                @if (quyen == QuyenDangNhap.BPQuanLy)
+                @if (quyen == QuyenDangNhap.BPHeThong)
                 {
                     <li id="QUANLYTAIKHOAN">
                         <a href="/NguoiDung/DanhSachTaiKhoan">
@@ -234,6 +239,18 @@
     <script src="/Plugins/scripts/vendor/nestable/jquery.nestable.js"></script>
     <script src="/Plugins/scripts/js/jquery.dataTables.min.js"></script>
     <script src="/Plugins/scripts/js/ark.min.js"></script>
-
+    <script type="text/javascript">
+        $('table.datatable-nooder').dataTable({
+            order: []
+        });
+    </script>
+    <style>
+        .form-control {
+            border-color: lightgray;
+        }
+        textarea {
+            resize: none;
+        }
+    </style>
 </body>
 </html>

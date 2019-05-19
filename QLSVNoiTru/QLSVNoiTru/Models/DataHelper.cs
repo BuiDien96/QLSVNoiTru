@@ -19,6 +19,7 @@ namespace QLSVNoiTru.Models
     }
     public class QuyenDangNhap
     {
+        public const int BPHeThong = 0;
         public const int BPQuanLy = 1;
         public const int BPDienNuoc = 2;
     }

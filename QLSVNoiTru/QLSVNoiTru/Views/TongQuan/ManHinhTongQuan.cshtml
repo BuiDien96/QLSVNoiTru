@@ -15,9 +15,9 @@
 </script>
 <div class="body">
     <section class="content">
-        <ol class="breadcrumb">
+        <!--ol class="breadcrumb">
             <li class="active"><i class="fa fa-dashboard"></i> Tổng quan</li>
-        </ol>
+        </ol-->
         <div class="header">
             <div class="col-md-12">
                 <h3 class="header-title">Tổng quan tình hình ký túc xá</h3>
@@ -28,36 +28,39 @@
         <div class="main-content">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="panel">
-                        <div class="panel-body">
-                            <ul class="col-md-12 stats">
-                                <li class="stat col-xs-4">
-                                    <span><b class="value">@ViewBag.svMoi</b></span>
-                                    <em>Sinh viên mới / Tháng @thang</em>
-                                </li>
-                                <li class="stat col-xs-4">
-                                    <span><b class="value">@ViewBag.tongSV</b></span>
-                                    <em>Số lượng sinh viên</em>
-                                </li>
-                                <li class="stat col-xs-4">
-                                    <span><b class="value">@ViewBag.tongSoPhong</b></span>
-                                    <em>Tổng số phòng</em>
-                                </li>
-                            </ul>
+                    @if (((QLSVNoiTru.Controllers.BaseController)this.ViewContext.Controller).CheckLogin(QLSVNoiTru.Models.QuyenDangNhap.BPQuanLy))
+                    {
+                        <div class="panel">
+                            <div class="panel-body">
+                                <ul class="col-md-12 stats">
+                                    <li class="stat col-xs-4" style="background: lightgreen;">
+                                        <span><b class="value">@ViewBag.svMoi</b></span>
+                                        <em>Sinh viên mới / Tháng @thang</em>
+                                    </li>
+                                    <li class="stat col-xs-4" style="background: lightblue;">
+                                        <span><b class="value">@ViewBag.tongSV</b></span>
+                                        <em>Số lượng sinh viên</em>
+                                    </li>
+                                    <li class="stat col-xs-4" style="background: lightpink;">
+                                        <span><b class="value">@ViewBag.tongSoPhong</b></span>
+                                        <em>Tổng số phòng</em>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div class="panel">
                         <div class="panel-body">
                             <ul class="col-md-12 stats">
-                                <li class="stat col-xs-4">
+                                <li class="stat col-xs-4" style="background: lightgreen;">
                                     <span><b class="value">@ViewBag.tienDien đ</b></span>
                                     <em>Tiền điện / Tháng @thang</em>
                                 </li>
-                                <li class="stat col-xs-4">
+                                <li class="stat col-xs-4" style="background: lightblue;">
                                     <span><b class="value">@ViewBag.tienNuoc đ</b></span>
                                     <em>Tiền nước / Tháng @thang</em>
                                 </li>
-                                <li class="stat col-xs-4">
+                                <li class="stat col-xs-4" style="background: lightpink;">
                                     <span><b class="value">@((float)ViewBag.tienDien + (float)ViewBag.tienNuoc) đ</b></span>
                                     <em>Tổng / Tháng @thang</em>
                                 </li>
@@ -73,7 +76,7 @@
                         </div>
                         <div class="panel-body" style="padding-top: 5px;">
                             <table class="table table-hover table-bordered">
-                                <thead>
+                                <thead style="background: skyblue;">
                                     <tr>
                                         <th class="col-md-4">#</th>
                                         <th class="col-md-4">Phòng</th>
@@ -99,6 +102,18 @@
                     </div>
                 </div>
             </div>
+            @*<div class="row">
+                <div class="col-md-12">
+                    <div class="panel ">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Tình hình điện nước trong năm (2019) ( x 1000 đ)</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="dashboardRevenues" class="chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
         </div>
         <!-- END: CONTENT -->
     </section>

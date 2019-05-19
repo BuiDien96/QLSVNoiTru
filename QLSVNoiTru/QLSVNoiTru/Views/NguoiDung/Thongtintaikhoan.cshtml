@@ -35,8 +35,9 @@
                         <div class="form-group">
                             <label>Quyền</label>
                             <select disabled name="Quyen" class="form-control" required>
-                                <option @(user.Quyen == 1 ? "selected" : "") value="1">BP Quản lý</option>
-                                <option @(user.Quyen == 2 ? "selected" : "") value="2">BP Điện nước</option>
+                                <option @(user.Quyen == 0 ? "selected" : "") value="0">Quản lý hệ thống</option>
+                                <option @(user.Quyen == 1 ? "selected" : "") value="1">Quản lý thông tin</option>
+                                <option @(user.Quyen == 2 ? "selected" : "") value="2">Quản lý điện nước</option>
                             </select>
                         </div>
                     </div>
