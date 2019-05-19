@@ -414,5 +414,66 @@ namespace QLSVNoiTru.Controllers
             ViewData["NoiDung"] = mauBieu.NoiDung;
             return View();
         }
+        public ActionResult InBienLaiThuTienPhongByPhiPhong(int phiphongId)
+        {
+            var db = new DB();
+            MauBieu mauBieu = db.MauBieux.FirstOrDefault(x => x.LoaiMauBieuId == (int)LoaiMauBieu.BIENLAITHUPHONG);
+            DateTime dateTime = DateTime.Now;
+            PhiPhong phiPhong = db.PhiPhongs.FirstOrDefault(x => x.PhiPhongId == phiphongId);
+            string SoTienBangChu = TienHelper.Convert_NumtoText(phiPhong.SoTien.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{sophieu}", "BLTP" + phiPhong.MaSinhVien);
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{tensinhvien}", phiPhong.SinhVien.TenSinhVien);
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{ngay}", dateTime.Day.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{thang}", dateTime.Month.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{nam}", dateTime.Year.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{phong}", phiPhong.SinhVien.Phong.SoHieuPhong);
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{tuthang}", phiPhong.Thang.ToString("MM-yyyy"));
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{denthang}", phiPhong.DenThang.ToString("MM-yyyy"));
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{sotien}", phiPhong.SoTien.ToString());
+            mauBieu.NoiDung = mauBieu.NoiDung.Replace("{sotienbangchu}", SoTienBangChu);
+            ViewData["NoiDung"] = mauBieu.NoiDung;
+            return View();
+        }
+        public ActionResult NopThemTienPhong(string MaSinhVien, DateTime TuThang, DateTime DenThang, float TienPhi)
+        {
+            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+                return Redirect("/Login/DangNhap");
+            var db = new DB();
+            db.PhiPhongs.Add(new PhiPhong()
+            {
+                MaSinhVien = MaSinhVien,
+                Thang = TuThang,
+                DenThang = DenThang,
+                SoTien = TienPhi,
+                TrangThai = true,
+            });
+            db.SaveChanges();
+            return Redirect("/SinhVien/ChiTietSinhVien?masinhvien=" + MaSinhVien);
+        }
+        public ActionResult CapNhatTienPhong(string MaSinhVien, int PhiPhongId, DateTime TuThang, DateTime DenThang, float TienPhi)
+        {
+            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+                return Redirect("/Login/DangNhap");
+            var db = new DB();
+            PhiPhong phiPhong = db.PhiPhongs.FirstOrDefault(x => x.PhiPhongId == PhiPhongId && x.MaSinhVien == MaSinhVien);
+            if (phiPhong != null)
+            {
+                phiPhong.Thang = TuThang;
+                phiPhong.DenThang = DenThang;
+                phiPhong.SoTien = TienPhi;
+                db.SaveChanges();
+            }
+            return Redirect("/SinhVien/ChiTietSinhVien?masinhvien=" + MaSinhVien);
+        }
+
+        public ActionResult SinhVienNopTienPhong()
+        {
+            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
+                return Redirect("/Login/DangNhap");
+            var db = new DB();
+            ViewData["sinhViens"] = db.SinhViens.Where(x=>x.TrangThaiO == (int)TrangThaiO.DangO).OrderByDescending(x => x.NgayNhanPhong).ToList();
+            return View();
+        }
+
     }
 }
