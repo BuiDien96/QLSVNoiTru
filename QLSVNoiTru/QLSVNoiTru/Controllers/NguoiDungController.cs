@@ -79,8 +79,6 @@ namespace QLSVNoiTru.Controllers
 
         public ActionResult Thongtintaikhoan()
         {
-            //if (!CheckLogin(QuyenDangNhap.BPQuanLy))
-            //    return Redirect("/Login/DangNhap");
             User user = (User)Session["user"];
             ViewData["user"] = user;
             return View();

@@ -19,7 +19,7 @@
         <div class="main-content">
             <div class="row">
                 <div class="col-md-12">
-                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover datatable">
+                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover datatable-no-sort">
                         <thead>
                             <tr>
                                 <th>Tên khoa</th>
@@ -49,7 +49,7 @@
                                     <td class="text-center">@DataHelper.ConvertTrangThaiO(item.TrangThaiO.Value)</td>
                                     <td class="text-center">
                                         <a href="/SinhVien/ChiTietSinhVien?masinhvien=@item.MaSinhVien" class="btn btn-primary btn-sm">Chi tiết</a>
-                                        <button onclick="xacnhanxoa('@item.MaSinhVien')" class="btn btn-danger btn-sm">Xóa</button>
+                                        @*<button onclick="xacnhanxoa('@item.MaSinhVien')" class="btn btn-danger btn-sm">Xóa</button>*@
                                     </td>
                                 </tr>
                             }
@@ -61,7 +61,7 @@
         <!-- END: CONTENT -->
     </section>
 </div>
-<div class="modal fade" id="modalDelete">
+@*<div class="modal fade" id="modalDelete">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -77,10 +77,16 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 <script>
-    function xacnhanxoa(maSinhVien) {
-        $("#xoa_banghi").attr("href", "/sinhvien/xoa?maSinhVien=" + maSinhVien);
-        $("#modalDelete").modal();
-    }
+    //function xacnhanxoa(maSinhVien) {
+    //    $("#xoa_banghi").attr("href", "/sinhvien/xoa?maSinhVien=" + maSinhVien);
+    //    $("#modalDelete").modal();
+    //}
+
+    $(document).ready(function () {
+        $('.datatable-no-sort').dataTable({
+            order: []
+        });
+    });
 </script>

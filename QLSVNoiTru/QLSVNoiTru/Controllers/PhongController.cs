@@ -68,6 +68,7 @@ namespace QLSVNoiTru.Controllers
                 phong.SoHieuPhong,
                 phong.TangId,
                 phong.SucChuaToiDa,
+                SvDaO = db.SinhViens.Where(x => x.SoHieuPhong == phong.SoHieuPhong && x.TrangThaiO == (int)TrangThaiO.DangO).Count(),
                 TrangThai = phong.TrangThai ?? false
             }, JsonRequestBehavior.AllowGet);
         }
@@ -78,7 +79,8 @@ namespace QLSVNoiTru.Controllers
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             Phong phongCu = db.Phongs.FirstOrDefault(x => x.SoHieuPhong == phong.SoHieuPhong);
-            if (phongCu != null)
+            bool phongConSinhVien = db.SinhViens.Where(x => x.SoHieuPhong == phongCu.SoHieuPhong && x.TrangThaiO == (int)TrangThaiO.DangO).Count() > 0;
+            if (phongCu != null && !phongConSinhVien)
             {
                 phongCu.MaLoaiPhong = phong.MaLoaiPhong;
                 phongCu.TangId = phong.TangId;
@@ -152,6 +154,9 @@ namespace QLSVNoiTru.Controllers
             if (!CheckLogin(QuyenDangNhap.BPQuanLy))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
+            Phong phong = db.Phongs.FirstOrDefault(x => x.SoHieuPhong == soHieuPhong);
+            if (phong.TrangThai == false)
+                return Redirect("/Phong/DanhSachPhong");
             ViewData["sinhViens"] = db.SinhViens
                     .Where(x => x.TrangThaiO == (int)TrangThaiO.DangO && x.SoHieuPhong == soHieuPhong)
                     .OrderByDescending(x => x.NgayNhanPhong).ToList();

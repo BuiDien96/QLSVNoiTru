@@ -177,12 +177,6 @@
     <Compile Include="Controllers\SinhVienController.cs" />
     <Compile Include="Controllers\TongQuanController.cs" />
     <Compile Include="Controllers\TrangThietBiController.cs" />
-    <Compile Include="Database\Action.cs">
-      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\BieuMau.cs">
-      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\GiaDien.cs">
       <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
@@ -246,16 +240,7 @@
     <Compile Include="Database\SinhVienChuyenPhong.cs">
       <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\SinhVienHoatDong.cs">
-      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\SinhVienKyLuat.cs">
-      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\SinhVienOLai.cs">
-      <DependentUpon>QLSVNoiTru.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\SinhVienTienPhong.cs">
       <DependentUpon>QLSVNoiTru.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\sysdiagram.cs">

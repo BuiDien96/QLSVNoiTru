@@ -1,23 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="QLSVNoiTruDatabaseStoreContainer" CdmEntityContainer="DB">
-    <EntitySetMapping Name="Actions">
-      <EntityTypeMapping TypeName="QLSVNoiTru.Database.Action">
-        <MappingFragment StoreEntitySet="Action">
-          <ScalarProperty Name="ActionId" ColumnName="ActionId" />
-          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BieuMaus">
-      <EntityTypeMapping TypeName="QLSVNoiTru.Database.BieuMau">
-        <MappingFragment StoreEntitySet="BieuMau">
-          <ScalarProperty Name="BieuMauId" ColumnName="BieuMauId" />
-          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="GiaDiens">
       <EntityTypeMapping TypeName="QLSVNoiTru.Database.GiaDien">
         <MappingFragment StoreEntitySet="GiaDien">
@@ -195,17 +178,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SinhVienHoatDongs">
-      <EntityTypeMapping TypeName="QLSVNoiTru.Database.SinhVienHoatDong">
-        <MappingFragment StoreEntitySet="SinhVienHoatDong">
-          <ScalarProperty Name="SinhVienHoatDongId" ColumnName="SinhVienHoatDongId" />
-          <ScalarProperty Name="MaSinhVien" ColumnName="MaSinhVien" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-          <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SinhVienKyLuats">
       <EntityTypeMapping TypeName="QLSVNoiTru.Database.SinhVienKyLuat">
         <MappingFragment StoreEntitySet="SinhVienKyLuat">
@@ -213,23 +185,6 @@
           <ScalarProperty Name="MaKyLuat" ColumnName="MaKyLuat" />
           <ScalarProperty Name="MaSinhVien" ColumnName="MaSinhVien" />
           <ScalarProperty Name="Chon" ColumnName="Chon" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SinhVienOLais">
-      <EntityTypeMapping TypeName="QLSVNoiTru.Database.SinhVienOLai">
-        <MappingFragment StoreEntitySet="SinhVienOLai">
-          <ScalarProperty Name="MaSinhVien" ColumnName="MaSinhVien" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SinhVienTienPhongs">
-      <EntityTypeMapping TypeName="QLSVNoiTru.Database.SinhVienTienPhong">
-        <MappingFragment StoreEntitySet="SinhVienTienPhong">
-          <ScalarProperty Name="SinhVienTienPhongId" ColumnName="SinhVienTienPhongId" />
-          <ScalarProperty Name="MaSinhVien" ColumnName="MaSinhVien" />
-          <ScalarProperty Name="Thang" ColumnName="Thang" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

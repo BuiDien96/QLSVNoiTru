@@ -16,38 +16,42 @@ namespace QLSVNoiTru.Controllers
                 return Redirect("/Login/DangNhap");
             List<HoaDonDienNuoc> hoaDonDienNuocs = new List<HoaDonDienNuoc>();
             var db = new DB();
-            Console.WriteLine(date);
             if (date == null)
                 date = DateTime.Now.Date;
             else
                 date = date.Value.Date;
 
-            DateTime thangtruoc = date.Value.AddMonths(-1);
+            // Lay danh sach phong ktx và giá điện giá nước
             List<Phong> phongs = db.Phongs.Where(y => y.TrangThai != null && y.TrangThai.Value).OrderBy(x => x.TangId).ToList();
             int giadienId = db.GiaDiens.OrderByDescending(x => x.NgayCapNhat).FirstOrDefault().GiaDienId;
             int gianuocId = db.GiaNuocs.OrderByDescending(x => x.NgayCapNhat).FirstOrDefault().GiaNuocId;
             phongs.ForEach(x =>
             {
-                HoaDonDienNuoc hoaDonDienNuoc = db.HoaDonDienNuocs.FirstOrDefault(y => y.ThangGhi.Year == date.Value.Year && y.ThangGhi.Month == date.Value.Month && y.SoHieuPhong == x.SoHieuPhong);
+                // Lấy hóa đơn của tháng hiện tại
+                HoaDonDienNuoc hoaDonDienNuoc = x.HoaDonDienNuocs.FirstOrDefault(y => y.ThangGhi.Year == date.Value.Year && y.ThangGhi.Month == date.Value.Month);
+                // Lấy hóa đơn của tháng có hóa đơn gần tháng hiện tại nhất
+                HoaDonDienNuoc hoaDonDienNuocThangGanNhat = x.HoaDonDienNuocs.Where(y=> DateTime.Compare(y.ThangGhi, (DateTime)date) < 0).OrderByDescending(y => y.ThangGhi).FirstOrDefault();
                 if (hoaDonDienNuoc == null)
                 {
-                    HoaDonDienNuoc hoaDonDienNuocThangTruoc = db.HoaDonDienNuocs.FirstOrDefault(y => y.ThangGhi.Year == thangtruoc.Year && y.ThangGhi.Month == thangtruoc.Month && y.SoHieuPhong == x.SoHieuPhong);
+                    // Trường hợp tháng hiện tại chưa có hóa đơn, tạo mới 
                     int chisodiendaumoi = 0;
                     int chisonuocdaumoi = 0;
                     string nguoinoptruoc = "";
-                    if (hoaDonDienNuocThangTruoc != null && hoaDonDienNuocThangTruoc.TrangThai == 1)
+                    if (hoaDonDienNuocThangGanNhat != null && hoaDonDienNuocThangGanNhat.TrangThai == 1)
                     {
-                        chisodiendaumoi = hoaDonDienNuocThangTruoc.Chisodiencuoi;
-                        chisonuocdaumoi = hoaDonDienNuocThangTruoc.Chisonuoccuoi;
-                        nguoinoptruoc = hoaDonDienNuocThangTruoc.NguoiNopTien;
+                        // nếu có hóa đơn tháng gần nhất, lấy chỉ số cuối của điện nước tháng gần nhất để làm chỉ số đầu của tháng hiện tại,
+                        // tương tự với chỉ số cuối của tháng hiện tại
+                        chisodiendaumoi = hoaDonDienNuocThangGanNhat.Chisodiencuoi;
+                        chisonuocdaumoi = hoaDonDienNuocThangGanNhat.Chisonuoccuoi;
+                        nguoinoptruoc = hoaDonDienNuocThangGanNhat.NguoiNopTien;
                     }
                     hoaDonDienNuoc = new HoaDonDienNuoc()
                     {
                         SoHieuPhong = x.SoHieuPhong,
                         ThangGhi = date.Value,
-                        Chisodiencuoi = 0,
+                        Chisodiencuoi = chisodiendaumoi,
                         Chisodiendau = chisodiendaumoi,
-                        Chisonuoccuoi = 0,
+                        Chisonuoccuoi = chisonuocdaumoi,
                         Chisonuocdau = chisonuocdaumoi,
                         GiaDienId = giadienId,
                         GiaNuocId = gianuocId,
@@ -56,6 +60,19 @@ namespace QLSVNoiTru.Controllers
                         TrangThai = -1,
                         TongTien = 0
                     };
+                } else
+                {
+                    // Trường hợp tháng hiện tại có hóa đơn
+                    if (hoaDonDienNuocThangGanNhat != null)
+                    {
+                        // chỉ số đầu mới là chỉ số cuối của tháng gần nhất
+                        // chỉ số cuối mới bằng tổng của chỉ số cuối tháng gần nhất và chênh lệch của chỉ số đầu và chỉ số cuối của tháng hiện tại 
+                        hoaDonDienNuoc.Chisodiencuoi = hoaDonDienNuocThangGanNhat.Chisodiencuoi + hoaDonDienNuoc.Chisodiencuoi - hoaDonDienNuoc.Chisodiendau;
+                        hoaDonDienNuoc.Chisodiendau = hoaDonDienNuocThangGanNhat.Chisodiencuoi;
+                        hoaDonDienNuoc.Chisonuoccuoi = hoaDonDienNuocThangGanNhat.Chisonuoccuoi + hoaDonDienNuoc.Chisonuoccuoi - hoaDonDienNuoc.Chisonuocdau;
+                        hoaDonDienNuoc.Chisonuocdau = hoaDonDienNuocThangGanNhat.Chisonuoccuoi;
+                        db.SaveChanges();
+                    }
                 }
                 hoaDonDienNuocs.Add(hoaDonDienNuoc);
             });
@@ -73,7 +90,7 @@ namespace QLSVNoiTru.Controllers
             DateTime dateTimeNow = DateTime.Now;
             hoaDonDienNuocs.ForEach(x =>
             {
-                HoaDonDienNuoc hoaDonDienNuoc = db.HoaDonDienNuocs.FirstOrDefault(y => y.SoHieuPhong == x.SoHieuPhong && x.ThangGhi == y.ThangGhi);
+                HoaDonDienNuoc hoaDonDienNuoc = db.HoaDonDienNuocs.FirstOrDefault(y => y.SoHieuPhong == x.SoHieuPhong && x.ThangGhi.Year == y.ThangGhi.Year && x.ThangGhi.Month == y.ThangGhi.Month);
                 if (hoaDonDienNuoc is null)
                 {
                     HoaDonDienNuoc hoaDonDienNuoc_temp = new HoaDonDienNuoc()

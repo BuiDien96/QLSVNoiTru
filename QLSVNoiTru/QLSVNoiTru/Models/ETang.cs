@@ -11,6 +11,7 @@ namespace QLSVNoiTru.Models
         public int SucChuaToiDa { get; set; }
         public int SoPhongDaO { get; set; }
         public LoaiPhong LoaiPhong { get; set; }
+        public bool TrangThai { get; set; }
     }
     public class ETang
     {

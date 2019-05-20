@@ -31,47 +31,6 @@ namespace QLSVNoiTru.Controllers
             return View();
         }
 
-        public ActionResult DangKyNoiTru(string gioitinh = "Nam")
-        {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
-                return Redirect("/Login/DangNhap");
-            var db = new DB();
-            ViewData["lops"] = db.Lops.ToList();
-            List<Tang> tangs = db.Tangs.OrderByDescending(x => x.TangId).ToList();
-            if (tangs == null)
-                tangs = new List<Tang>();
-            List<ETang> eTangs = new List<ETang>();
-            tangs.ForEach(x =>
-            {
-                ETang eTang = new ETang()
-                {
-                    TangId = x.TangId,
-                    TenTang = x.TenTang,
-                    Phongs = new List<EPhong>()
-                };
-                x.Phongs.Where(y => y.TrangThai != null && y.TrangThai.Value).ToList().ForEach(y =>
-                  {
-                      if ((gioitinh == "Nam" && (y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNam || y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.CaNamNu))
-                      || (gioitinh == "Nữ" && (y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNu || y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.CaNamNu)))
-                      {
-                          int svDaO = db.SinhViens.Where(z => z.SoHieuPhong == y.SoHieuPhong && z.TrangThaiO == (int)TrangThaiO.DangO).Count();
-                          eTang.Phongs.Add(new EPhong()
-                          {
-                              LoaiPhong = y.LoaiPhong,
-                              MaLoaiPhong = y.MaLoaiPhong,
-                              SoHieuPhong = y.SoHieuPhong,
-                              SoPhongDaO = svDaO,
-                              SucChuaToiDa = y.SucChuaToiDa,
-                              TangId = y.TangId
-                          });
-                      }
-                  });
-                eTangs.Add(eTang);
-            });
-            ViewData["eTangs"] = eTangs;
-            ViewBag.gioitinh = gioitinh;
-            return View();
-        }
         public JsonResult KiemTraTrung(string maSinhVien)
         {
             if (!CheckLogin(QuyenDangNhap.BPQuanLy))
@@ -200,73 +159,6 @@ namespace QLSVNoiTru.Controllers
             return RedirectToAction("ChuyenPhong");
         }
 
-        public ActionResult DangKyNoiTruNhanh()
-        {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
-                return Redirect("/Login/DangNhap");
-            var db = new DB();
-            ViewData["sinhViens"] = db.SinhViens.Where(x => x.TrangThaiO == (int)TrangThaiO.ChoNhanPhongMoi).OrderByDescending(x => x.NgayNhanPhong).ToList();
-            return View();
-        }
-
-        public ActionResult ChiTietDangKyNoiTruNhanh(string masinhvien)
-        {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
-                return Redirect("/Login/DangNhap");
-            var db = new DB();
-            SinhVien sinhVien = db.SinhViens.FirstOrDefault(x => x.MaSinhVien == masinhvien);
-            List<Tang> tangs = db.Tangs.OrderByDescending(x => x.TangId).ToList();
-            if (tangs == null)
-                tangs = new List<Tang>();
-            List<ETang> eTangs = new List<ETang>();
-            tangs.ForEach(x =>
-            {
-                ETang eTang = new ETang()
-                {
-                    TangId = x.TangId,
-                    TenTang = x.TenTang,
-                    Phongs = new List<EPhong>()
-                };
-                x.Phongs.ToList().ForEach(y =>
-                {
-                    if ((sinhVien.GioiTinh == "Nam" && (y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNam || y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.CaNamNu))
-                       || (sinhVien.GioiTinh == "Nữ" && (y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNu || y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.CaNamNu)))
-                    {
-                        int svDaO = db.SinhViens.Where(z => z.SoHieuPhong == y.SoHieuPhong && z.TrangThaiO == (int)TrangThaiO.DangO).Count();
-                        eTang.Phongs.Add(new EPhong()
-                        {
-                            LoaiPhong = y.LoaiPhong,
-                            MaLoaiPhong = y.MaLoaiPhong,
-                            SoHieuPhong = y.SoHieuPhong,
-                            SoPhongDaO = svDaO,
-                            SucChuaToiDa = y.SucChuaToiDa,
-                            TangId = y.TangId
-                        });
-                    }
-                });
-                eTangs.Add(eTang);
-            });
-            ViewData["eTangs"] = eTangs;
-            ViewData["lops"] = db.Lops.ToList();
-            ViewData["sinhvien"] = sinhVien;
-            return View();
-        }
-        [HttpPost]
-        public ActionResult DangKyNoiTruNhanh(SinhVien sinhVien)
-        {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
-                return Redirect("/Login/DangNhap");
-            var db = new DB();
-            SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSinhVien == sinhVien.MaSinhVien);
-            if (sv != null)
-            {
-                sv.SoHieuPhong = sinhVien.SoHieuPhong;
-                sv.TrangThaiO = (int)TrangThaiO.DangO;
-                db.SaveChanges();
-            }
-            return RedirectToAction("DangKyNoiTruNhanh");
-        }
-
         public ActionResult DangKyThem(string gioitinh = "Nam")
         {
             if (!CheckLogin(QuyenDangNhap.BPQuanLy))
@@ -285,7 +177,7 @@ namespace QLSVNoiTru.Controllers
                     TenTang = x.TenTang,
                     Phongs = new List<EPhong>()
                 };
-                x.Phongs.ToList().ForEach(y =>
+                x.Phongs.Where(z=>z.TrangThai == true).ToList().ForEach(y =>
                 {
                     if ((gioitinh == "Nam" && (y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNam || y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.CaNamNu))
                       || (gioitinh == "Nữ" && (y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.ChiDanhCHoNu || y.LoaiPhong.MucDich == (int)MucDichLoaiPhong.CaNamNu)))
@@ -315,26 +207,16 @@ namespace QLSVNoiTru.Controllers
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             SinhVien sinhVien = db.SinhViens.FirstOrDefault(x => x.MaSinhVien == masinhvien);
+            DateTime currentDate = DateTime.Now;
+            PhiPhong phiPhongCuoiCung = sinhVien.PhiPhongs.Where(x => x.TrangThai == true).OrderByDescending(x => x.DenThang).FirstOrDefault();
+            if (phiPhongCuoiCung != null)
+            {
+                ViewData["ngayTiepTheoCoTheNopTien"] = phiPhongCuoiCung.DenThang.AddDays(1).ToString("yyyy-MM-dd");
+            }
             ViewData["sinhVien"] = sinhVien;
             ViewData["lops"] = db.Lops.ToList();
             ViewData["phiPhongs"] = db.PhiPhongs.Where(x => x.MaSinhVien == masinhvien).OrderByDescending(x => x.Thang).ToList();
             return View();
-        }
-        public ActionResult Xoa(string masinhvien)
-        {
-            if (!CheckLogin(QuyenDangNhap.BPQuanLy))
-                return Redirect("/Login/DangNhap");
-            var db = new DB();
-            SinhVien sinhVien = db.SinhViens.FirstOrDefault(x => x.MaSinhVien == masinhvien);
-            if (sinhVien != null)
-            {
-                db.SinhVienKyLuats.RemoveRange(db.SinhVienKyLuats.Where(x => x.MaSinhVien == masinhvien));
-                db.SinhVienChuyenPhongs.RemoveRange(db.SinhVienChuyenPhongs.Where(x => x.MaSinhVien == masinhvien));
-                db.SinhVienOLais.RemoveRange(db.SinhVienOLais.Where(x => x.MaSinhVien == masinhvien));
-                db.SinhViens.Remove(sinhVien);
-                db.SaveChanges();
-            }
-            return RedirectToAction("DanhSachSinhVien");
         }
 
         public ActionResult CapNhatThongTin(SinhVien sinhVien)
@@ -439,13 +321,24 @@ namespace QLSVNoiTru.Controllers
             if (!CheckLogin(QuyenDangNhap.BPQuanLy))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
+            SinhVien sinhVien = db.SinhViens.FirstOrDefault(x => x.MaSinhVien == MaSinhVien);
+            DateTime currentDate = DateTime.Now;
+            DateTime TuThangMoi = TuThang;
+            PhiPhong phiPhongCuoiCung = sinhVien.PhiPhongs.Where(x => x.TrangThai == true).OrderByDescending(x => x.DenThang).FirstOrDefault();
+            if (phiPhongCuoiCung != null)
+            {
+                if (DateTime.Compare(TuThang, phiPhongCuoiCung.DenThang) != 1)
+                {
+                    TuThangMoi = phiPhongCuoiCung.DenThang.AddDays(1);
+                }
+            }
             db.PhiPhongs.Add(new PhiPhong()
             {
                 MaSinhVien = MaSinhVien,
-                Thang = TuThang,
+                Thang = TuThangMoi,
                 DenThang = DenThang,
                 SoTien = TienPhi,
-                TrangThai = true,
+                TrangThai = true
             });
             db.SaveChanges();
             return Redirect("/SinhVien/ChiTietSinhVien?masinhvien=" + MaSinhVien);

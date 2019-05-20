@@ -1,5 +1,3 @@
-D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\obj\Debug\QLSVNoiTru.csprojAssemblyReference.cache
-D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\obj\Debug\QLSVNoiTru.csproj.CoreCompileInputs.cache
 D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\bin\ApplicationInsights.config
 D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\bin\QLSVNoiTru.dll.config
 D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\bin\QLSVNoiTru.dll
@@ -90,6 +88,8 @@ D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\bin\Microsoft.AI.DependencyColle
 D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\bin\Microsoft.AI.WindowsServer.xml
 D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\bin\Microsoft.AI.Web.xml
 D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\obj\Debug\QLSVNoiTru.csprojAssemblyReference.cache
+D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\obj\Debug\QLSVNoiTru.csproj.CoreCompileInputs.cache
 D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\obj\Debug\QLSVNoiTru.csproj.CopyComplete
 D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\obj\Debug\QLSVNoiTru.dll
 D:\DoAn\QLSVNT\QLSVNoiTru\QLSVNoiTru\QLSVNoiTru\obj\Debug\QLSVNoiTru.pdb

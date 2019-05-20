@@ -1,9 +1,7 @@
 ﻿using QLSVNoiTru.Database;
 using QLSVNoiTru.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace QLSVNoiTru.Controllers
@@ -13,7 +11,7 @@ namespace QLSVNoiTru.Controllers
         // GET: GiaDien
         public ActionResult CapNhatGiaDien()
         {
-            if (!CheckLogin())
+            if (!CheckLogin(QuyenDangNhap.BPDienNuoc))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             ViewData["giaDiens"] = db.GiaDiens.OrderByDescending(x=>x.NgayCapNhat).ToList();
@@ -23,7 +21,7 @@ namespace QLSVNoiTru.Controllers
         [HttpPost]
         public ActionResult CapNhat(float DonGia)
         {
-            if (!CheckLogin())
+            if (!CheckLogin(QuyenDangNhap.BPDienNuoc))
                 return Redirect("/Login/DangNhap");
             var db = new DB();
             GiaDien giaDien = new GiaDien()

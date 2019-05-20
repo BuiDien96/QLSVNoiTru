@@ -1,20 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="QLSVNoiTru.Database" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Action">
-    <Key>
-      <PropertyRef Name="ActionId" />
-    </Key>
-    <Property Name="ActionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-  </EntityType>
-  <EntityType Name="BieuMau">
-    <Key>
-      <PropertyRef Name="BieuMauId" />
-    </Key>
-    <Property Name="BieuMauId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TieuDe" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="GiaDien">
     <Key>
       <PropertyRef Name="GiaDienId" />
@@ -188,9 +173,7 @@
     <NavigationProperty Name="PhiPhongs" Relationship="Self.FK_PhiPhong_SinhVien" FromRole="SinhVien" ToRole="PhiPhong" />
     <NavigationProperty Name="Phong" Relationship="Self.FK_SinhVien_Phong" FromRole="SinhVien" ToRole="Phong" />
     <NavigationProperty Name="SinhVienChuyenPhongs" Relationship="Self.FK_SinhVienChuyenPhong_SinhVien" FromRole="SinhVien" ToRole="SinhVienChuyenPhong" />
-    <NavigationProperty Name="SinhVienHoatDongs" Relationship="Self.FK_SinhVienHoatDong_SinhVien" FromRole="SinhVien" ToRole="SinhVienHoatDong" />
     <NavigationProperty Name="SinhVienKyLuats" Relationship="Self.FK_SinhVienKyLuat_SinhVien" FromRole="SinhVien" ToRole="SinhVienKyLuat" />
-    <NavigationProperty Name="SinhVienTienPhongs" Relationship="Self.FK_SinhVienTienPhong_SinhVien" FromRole="SinhVien" ToRole="SinhVienTienPhong" />
   </EntityType>
   <EntityType Name="SinhVienChuyenPhong">
     <Key>
@@ -204,17 +187,6 @@
     <Property Name="NgayCapNhat" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="SinhVien" Relationship="Self.FK_SinhVienChuyenPhong_SinhVien" FromRole="SinhVienChuyenPhong" ToRole="SinhVien" />
   </EntityType>
-  <EntityType Name="SinhVienHoatDong">
-    <Key>
-      <PropertyRef Name="SinhVienHoatDongId" />
-    </Key>
-    <Property Name="SinhVienHoatDongId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaSinhVien" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="NgayCapNhat" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="SinhVien" Relationship="Self.FK_SinhVienHoatDong_SinhVien" FromRole="SinhVienHoatDong" ToRole="SinhVien" />
-  </EntityType>
   <EntityType Name="SinhVienKyLuat">
     <Key>
       <PropertyRef Name="SinhVienKyLuatId" />
@@ -225,22 +197,6 @@
     <Property Name="Chon" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="KyLuat" Relationship="Self.FK_SinhVienKyLuat_KyLuat" FromRole="SinhVienKyLuat" ToRole="KyLuat" />
     <NavigationProperty Name="SinhVien" Relationship="Self.FK_SinhVienKyLuat_SinhVien" FromRole="SinhVienKyLuat" ToRole="SinhVien" />
-  </EntityType>
-  <EntityType Name="SinhVienOLai">
-    <Key>
-      <PropertyRef Name="MaSinhVien" />
-    </Key>
-    <Property Name="MaSinhVien" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-  </EntityType>
-  <EntityType Name="SinhVienTienPhong">
-    <Key>
-      <PropertyRef Name="SinhVienTienPhongId" />
-    </Key>
-    <Property Name="SinhVienTienPhongId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaSinhVien" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Thang" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="TrangThai" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="SinhVien" Relationship="Self.FK_SinhVienTienPhong_SinhVien" FromRole="SinhVienTienPhong" ToRole="SinhVien" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -449,18 +405,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SinhVienHoatDong_SinhVien">
-    <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
-    <End Role="SinhVienHoatDong" Type="Self.SinhVienHoatDong" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SinhVien">
-        <PropertyRef Name="MaSinhVien" />
-      </Principal>
-      <Dependent Role="SinhVienHoatDong">
-        <PropertyRef Name="MaSinhVien" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SinhVienKyLuat_SinhVien">
     <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
     <End Role="SinhVienKyLuat" Type="Self.SinhVienKyLuat" Multiplicity="*" />
@@ -473,21 +417,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SinhVienTienPhong_SinhVien">
-    <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
-    <End Role="SinhVienTienPhong" Type="Self.SinhVienTienPhong" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SinhVien">
-        <PropertyRef Name="MaSinhVien" />
-      </Principal>
-      <Dependent Role="SinhVienTienPhong">
-        <PropertyRef Name="MaSinhVien" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="DB" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Actions" EntityType="Self.Action" />
-    <EntitySet Name="BieuMaus" EntityType="Self.BieuMau" />
     <EntitySet Name="GiaDiens" EntityType="Self.GiaDien" />
     <EntitySet Name="GiaNuocs" EntityType="Self.GiaNuoc" />
     <EntitySet Name="HoaDonDienNuocs" EntityType="Self.HoaDonDienNuoc" />
@@ -504,10 +434,7 @@
     <EntitySet Name="Quyens" EntityType="Self.Quyen" />
     <EntitySet Name="SinhViens" EntityType="Self.SinhVien" />
     <EntitySet Name="SinhVienChuyenPhongs" EntityType="Self.SinhVienChuyenPhong" />
-    <EntitySet Name="SinhVienHoatDongs" EntityType="Self.SinhVienHoatDong" />
     <EntitySet Name="SinhVienKyLuats" EntityType="Self.SinhVienKyLuat" />
-    <EntitySet Name="SinhVienOLais" EntityType="Self.SinhVienOLai" />
-    <EntitySet Name="SinhVienTienPhongs" EntityType="Self.SinhVienTienPhong" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Tangs" EntityType="Self.Tang" />
     <EntitySet Name="ThietBis" EntityType="Self.ThietBi" />
@@ -568,17 +495,9 @@
       <End Role="SinhVien" EntitySet="SinhViens" />
       <End Role="SinhVienChuyenPhong" EntitySet="SinhVienChuyenPhongs" />
     </AssociationSet>
-    <AssociationSet Name="FK_SinhVienHoatDong_SinhVien" Association="Self.FK_SinhVienHoatDong_SinhVien">
-      <End Role="SinhVien" EntitySet="SinhViens" />
-      <End Role="SinhVienHoatDong" EntitySet="SinhVienHoatDongs" />
-    </AssociationSet>
     <AssociationSet Name="FK_SinhVienKyLuat_SinhVien" Association="Self.FK_SinhVienKyLuat_SinhVien">
       <End Role="SinhVien" EntitySet="SinhViens" />
       <End Role="SinhVienKyLuat" EntitySet="SinhVienKyLuats" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SinhVienTienPhong_SinhVien" Association="Self.FK_SinhVienTienPhong_SinhVien">
-      <End Role="SinhVien" EntitySet="SinhViens" />
-      <End Role="SinhVienTienPhong" EntitySet="SinhVienTienPhongs" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
